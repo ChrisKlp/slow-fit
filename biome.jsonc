@@ -5,6 +5,9 @@
     "rules": {
       "suspicious": {
         "noUnknownAtRules": "off"
+      },
+      "performance": {
+        "noNamespaceImport": "off"
       }
     }
   }
