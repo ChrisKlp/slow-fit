@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "pnpm exec ultracite check",
-    "lint:fix": "pnpm exec ultracite check --fix"
+    "lint:fix": "pnpm exec ultracite fix"
   },
   "dependencies": {
     "next": "16.0.0-beta.0",
