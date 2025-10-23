@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calendar, Home, Inbox, LogIn, Search, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -42,6 +42,11 @@ const items = [
     url: "#",
     icon: Settings,
   },
+  {
+    title: "Login",
+    url: "/login",
+    icon: LogIn,
+  },
 ];
 
 export function AppSidebar() {
@@ -50,7 +55,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader
         className={cn(
-          "grid h-20 overflow-hidden border-b pl-8 align-items-center transition-all",
+          "grid h-20 overflow-hidden pl-8 align-items-center transition-all",
           state === "collapsed" && "pl-4"
         )}
       >

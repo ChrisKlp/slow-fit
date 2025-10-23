@@ -1,5 +1,6 @@
+import { AppBar } from "@/components/app-bar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function MainLayout({
   children,
@@ -9,10 +10,10 @@ export default function MainLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
+      <div className="w-full">
+        <AppBar />
+        <main className="container mx-auto p-4 md:p-6">{children}</main>
+      </div>
     </SidebarProvider>
   );
 }
