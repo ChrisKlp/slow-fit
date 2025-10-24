@@ -18,7 +18,7 @@ export default function LoginPage() {
     <main className="grid min-h-svh bg-background lg:grid-cols-5">
       <div className="col-span-2 flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <Logo dark />
+          <Logo />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md rounded-xl border bg-card p-8 sm:p-12">
@@ -40,6 +40,7 @@ export default function LoginPage() {
           alt="Image"
           className="absolute inset-0 z-[-1] h-full w-full object-cover opacity-70 mix-blend-overlay grayscale"
           height={720}
+          loading="eager"
           src="https://images.unsplash.com/photo-1629339837617-7069ce9e7f6b?q=80&w=1600"
           width={1280}
         />
