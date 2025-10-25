@@ -87,10 +87,7 @@ export function WorkoutList() {
             <span>{workout.title}</span>
           </div>
           <span className="justify-self-end">
-            <Link
-              className="text-blue-200 text-link transition-colors hover:text-blue-50"
-              href={"/program/#"}
-            >
+            <Link className="text-link" href={"/program/#"}>
               {workout.program}
             </Link>
           </span>

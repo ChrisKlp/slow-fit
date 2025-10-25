@@ -1,6 +1,7 @@
 import { Hourglass, SquareCheckBig, TrendingUp } from "lucide-react";
 import { DashboardCard } from "@/components/dashboard-card";
 import { SmallStat } from "@/components/small-stat";
+import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
 
 export default function HomePage() {
@@ -18,9 +19,23 @@ export default function HomePage() {
         </DashboardCard>
       </div>
       <div className="col-span-1 grid gap-4">
-        <div className="rounded-2xl border bg-card p-4">Profile</div>
-        <div className="rounded-2xl border bg-card p-4">Next workout</div>
-        <div className="rounded-2xl border bg-card p-4">Last workouts</div>
+        <div className="rounded-2xl border bg-card p-4">Active Plans</div>
+        <WorkoutCard
+          date="2025-03-01"
+          header="Next workout"
+          image="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600"
+          link="workout/#"
+          plan="StrongLifts"
+          title="Full body workout"
+        />
+        <WorkoutCard
+          date="2025-03-01"
+          header="Last workout"
+          image="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600"
+          link="workout/#"
+          plan="StrongLifts"
+          title="Upper body workout"
+        />
       </div>
     </div>
   );
