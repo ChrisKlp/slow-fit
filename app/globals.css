@@ -120,4 +120,8 @@
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
   }
+
+  .text-link {
+    @apply underline underline-offset-4;
+  }
 }

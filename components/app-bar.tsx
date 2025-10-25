@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 import {
@@ -10,12 +9,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { SidebarTrigger } from "./ui/sidebar";
 
 export function AppBar() {
   return (
-    <div className="flex h-14 items-center justify-between gap-2 border-b px-2 pr-4 md:px-4 md:pr-6">
+    <header className="sticky top-0 flex h-14 items-center justify-between gap-2 border-b bg-background px-2 pr-4 md:px-4 md:pr-6">
       <SidebarTrigger className="size-9 [&>svg]:size-5!" size="lg" />
       <div className="flex items-center gap-2">
         <DropdownMenu>
@@ -25,10 +25,8 @@ export function AppBar() {
               variant="ghost"
             >
               <Avatar className="h-8 w-8">
-                <AvatarImage src="https://avatar.iran.liara.run/public/32" />
-                <AvatarFallback className="bg-slate-200 text-slate-700 text-sm">
-                  KK
-                </AvatarFallback>
+                <AvatarImage src="https://github.com/chrisklp.png" />
+                <AvatarFallback>KK</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
@@ -66,6 +64,6 @@ export function AppBar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </header>
   );
 }
