@@ -11,6 +11,7 @@ type WorkoutCardProps = {
   image: string;
   link?: string;
   className?: string;
+  variant?: "default" | "accent";
 };
 
 export function WorkoutCard({
@@ -21,9 +22,15 @@ export function WorkoutCard({
   image,
   link,
   className,
+  variant = "default",
 }: WorkoutCardProps) {
   return (
-    <DashboardCard className={cn("", className)} link={link} title={header}>
+    <DashboardCard
+      className={cn("", className)}
+      link={link}
+      title={header}
+      variant={variant}
+    >
       <Image
         alt={title}
         className="h-40 rounded-lg object-cover"

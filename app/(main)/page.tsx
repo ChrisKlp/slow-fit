@@ -27,6 +27,7 @@ export default function HomePage() {
           link="workout/#"
           plan="StrongLifts"
           title="Full body workout"
+          variant="accent"
         />
         <WorkoutCard
           date="2025-03-01"
