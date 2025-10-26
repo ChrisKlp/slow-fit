@@ -36,9 +36,7 @@ export function WorkoutList({ title, link, workouts }: WorkoutListProps) {
               <span>{workout.title}</span>
             </div>
             <span>
-              <Link className="text-link" href={"/program/#"}>
-                {workout.program}
-              </Link>
+              <span>{workout.program}</span>
             </span>
             <span className="text-muted-foreground">{workout.date}</span>
           </Link>

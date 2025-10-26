@@ -1,4 +1,5 @@
 import { Hourglass, SquareCheckBig, TrendingUp } from "lucide-react";
+import { Heatmap } from "@/components/heatmap";
 import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
@@ -23,17 +24,28 @@ export default function HomePage() {
           Icon={TrendingUp}
           variant="teal"
         />
-        <div className="col-span-3 rounded-2xl border bg-card p-4">
-          Weekly Schedule
-        </div>
-        <div className="col-span-3">
+        <div className="col-span-3 grid gap-4">
+          <Heatmap
+            workouts={[
+              {
+                date: "2025-10-26",
+                type: "scheduled",
+              },
+              {
+                date: "2025-10-25",
+                type: "completed",
+              },
+              {
+                date: "2025-10-20",
+                type: "scheduled",
+              },
+            ]}
+          />
           <WorkoutList
             link="history/#"
             title="Scheduled Workouts"
             workouts={workouts.slice(0, 3)}
           />
-        </div>
-        <div className="col-span-3">
           <WorkoutList link="history/#" title="History" workouts={workouts} />
         </div>
       </div>
