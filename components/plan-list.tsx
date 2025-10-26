@@ -1,5 +1,6 @@
 import { Calendar } from "lucide-react";
 import Link from "next/link";
+import { CardHeader } from "./card-header";
 import { Badge } from "./ui/badge";
 
 const plans = [
@@ -30,7 +31,7 @@ type PlanListProps = {
 export function PlanList({ title }: PlanListProps) {
   return (
     <div className="card overflow-hidden p-0">
-      <p className="border-b p-6 font-semibold">{title}</p>
+      <CardHeader title={title} />
       <div className="grid items-center">
         {plans.map((plan, index) => (
           <Link

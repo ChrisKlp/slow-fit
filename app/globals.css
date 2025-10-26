@@ -126,6 +126,6 @@
   }
 
   .card {
-    @apply rounded-lg border bg-card p-6;
+    @apply rounded-lg border bg-card;
   }
 }
