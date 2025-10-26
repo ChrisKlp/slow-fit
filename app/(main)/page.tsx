@@ -5,6 +5,7 @@ import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
 import { plans } from "@/lib/mockData/plans";
+import { workoutsHeatmap } from "@/lib/mockData/workout-heatmap";
 import { workouts } from "@/lib/mockData/workouts";
 
 export default function HomePage() {
@@ -25,22 +26,7 @@ export default function HomePage() {
           variant="teal"
         />
         <div className="col-span-3 grid gap-4">
-          <Heatmap
-            workouts={[
-              {
-                date: "2025-10-26",
-                type: "scheduled",
-              },
-              {
-                date: "2025-10-25",
-                type: "completed",
-              },
-              {
-                date: "2025-10-20",
-                type: "scheduled",
-              },
-            ]}
-          />
+          <Heatmap workouts={workoutsHeatmap} />
           <WorkoutList
             link="history/#"
             title="Scheduled Workouts"
