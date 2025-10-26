@@ -1,5 +1,5 @@
 import { Hourglass, SquareCheckBig, TrendingUp } from "lucide-react";
-import { DashboardCard } from "@/components/dashboard-card";
+import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
@@ -24,12 +24,12 @@ export default function HomePage() {
         <div className="col-span-3 rounded-2xl border bg-card p-4">
           Weekly Schedule
         </div>
-        <DashboardCard className="col-span-3" title="Workout List">
-          <WorkoutList />
-        </DashboardCard>
+        <div className="col-span-3">
+          <WorkoutList title="Workout List" />
+        </div>
       </div>
       <div className="col-span-1 grid gap-4">
-        <div className="rounded-2xl border bg-card p-4">Active Plans</div>
+        <PlanList title="Active Plans" />
         <WorkoutCard
           date="2025-03-01"
           header="Next workout"

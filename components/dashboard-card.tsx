@@ -19,7 +19,7 @@ export function DashboardCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border bg-card p-6",
+        "card",
         variant === "accent" && "border-0 bg-blue-800",
         className
       )}

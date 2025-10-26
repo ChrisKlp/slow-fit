@@ -124,4 +124,8 @@
   .text-link {
     @apply underline underline-offset-4 hover:text-blue-50 text-blue-200 transition-colors;
   }
+
+  .card {
+    @apply rounded-lg border bg-card p-6;
+  }
 }
