@@ -1,37 +1,19 @@
 import { Calendar } from "lucide-react";
 import Link from "next/link";
+import type { Plan } from "@/lib/mockData/plans";
 import { CardHeader } from "./card-header";
 import { Badge } from "./ui/badge";
 
-const plans = [
-  {
-    title: "StrongLifts",
-    startDate: "2025-03-01",
-    endDate: "2025-03-31",
-    progress: 16,
-  },
-  {
-    title: "Workout Buddies",
-    startDate: "2025-03-01",
-    endDate: "2025-03-31",
-    progress: 60,
-  },
-  {
-    title: "Lazy Body",
-    startDate: "2025-03-01",
-    endDate: "2025-03-31",
-    progress: 74,
-  },
-];
-
 type PlanListProps = {
   title: string;
+  link?: string;
+  plans: Plan[];
 };
 
-export function PlanList({ title }: PlanListProps) {
+export function PlanList({ title, link, plans }: PlanListProps) {
   return (
     <div className="card overflow-hidden p-0">
-      <CardHeader title={title} />
+      <CardHeader link={link} title={title} />
       <div className="grid items-center">
         {plans.map((plan, index) => (
           <Link

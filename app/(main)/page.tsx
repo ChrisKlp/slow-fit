@@ -3,6 +3,8 @@ import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
+import { plans } from "@/lib/mockData/plans";
+import { workouts } from "@/lib/mockData/workouts";
 
 export default function HomePage() {
   return (
@@ -25,11 +27,18 @@ export default function HomePage() {
           Weekly Schedule
         </div>
         <div className="col-span-3">
-          <WorkoutList title="Workout List" />
+          <WorkoutList
+            link="history/#"
+            title="Scheduled Workouts"
+            workouts={workouts.slice(0, 3)}
+          />
+        </div>
+        <div className="col-span-3">
+          <WorkoutList link="history/#" title="History" workouts={workouts} />
         </div>
       </div>
       <div className="col-span-1 grid gap-4">
-        <PlanList title="Active Plans" />
+        <PlanList link="plans/#" plans={plans} title="Active Plans" />
         <WorkoutCard
           date="2025-03-01"
           header="Next workout"
