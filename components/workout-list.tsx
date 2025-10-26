@@ -70,6 +70,11 @@ const workouts = [
 export function WorkoutList() {
   return (
     <div className="grid items-center">
+      <div className="grid grid-cols-4 items-center gap-4 rounded-lg p-3 text-muted-foreground text-sm">
+        <span className="col-span-2">Name</span>
+        <span>Plan</span>
+        <span>Date</span>
+      </div>
       {workouts.map((workout, index) => (
         <Link
           className="grid grid-cols-4 items-center gap-4 rounded-lg p-3 text-sm transition-colors hover:bg-accent"
@@ -86,14 +91,12 @@ export function WorkoutList() {
             />
             <span>{workout.title}</span>
           </div>
-          <span className="justify-self-end">
+          <span>
             <Link className="text-link" href={"/program/#"}>
               {workout.program}
             </Link>
           </span>
-          <span className="justify-self-end text-muted-foreground">
-            {workout.date}
-          </span>
+          <span className="text-muted-foreground">{workout.date}</span>
         </Link>
       ))}
     </div>

@@ -39,7 +39,7 @@ export function WorkoutCard({
         width={600}
       />
       <div className="mt-3 grid gap-1">
-        <p className="font-bold">{title}</p>
+        <p className="font-semibold">{title}</p>
         <span className="flex items-center gap-2 text-sm">
           <Calendar className="size-4 text-blue-400" /> {date}
         </span>

@@ -19,13 +19,13 @@ export function DashboardCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border bg-card p-4",
-        variant === "accent" && "border-blue-600 bg-blue-800",
+        "rounded-2xl border bg-card p-6",
+        variant === "accent" && "border-0 bg-blue-800",
         className
       )}
     >
-      <div className="flex items-center justify-between pb-4">
-        <p>{title}</p>
+      <div className="mb-6 flex items-center justify-between">
+        <p className="font-semibold">{title}</p>
         {link && (
           <Link className="text-link text-sm" href={link}>
             View
