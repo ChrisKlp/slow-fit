@@ -8,9 +8,19 @@ export default function HomePage() {
   return (
     <div className="grid grid-cols-3 items-start gap-6">
       <div className="col-span-2 grid grid-cols-3 gap-4">
-        <SmallStat content="15" Icon={SquareCheckBig} title="Completed" />
-        <SmallStat content="20" Icon={Hourglass} title="To Go" />
-        <SmallStat content="46%" Icon={TrendingUp} title="Progress" />
+        <SmallStat
+          content="15"
+          description="Completed"
+          Icon={SquareCheckBig}
+          variant="primary"
+        />
+        <SmallStat content="20" description="To Go" Icon={Hourglass} />
+        <SmallStat
+          content="46%"
+          description="Progress"
+          Icon={TrendingUp}
+          variant="teal"
+        />
         <div className="col-span-3 rounded-2xl border bg-card p-4">
           Weekly Schedule
         </div>
