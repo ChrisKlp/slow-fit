@@ -7,6 +7,7 @@ import { WorkoutList } from "@/components/workout-list";
 import { plans } from "@/lib/mockData/plans";
 import { workoutSessions } from "@/lib/mockData/workout-sessions";
 import { workouts } from "@/lib/mockData/workouts";
+import { routes } from "@/lib/navigation-items";
 
 export default function HomePage() {
   return (
@@ -28,7 +29,7 @@ export default function HomePage() {
         <div className="col-span-3 grid gap-4">
           <Heatmap workouts={workoutSessions} />
           <WorkoutList
-            link="history/#"
+            link="history"
             title="Scheduled Workouts"
             workouts={workouts.slice(0, 3)}
           />
@@ -36,12 +37,16 @@ export default function HomePage() {
         </div>
       </div>
       <div className="col-span-1 grid gap-4">
-        <PlanList link="plans/#" plans={plans} title="Active Plans" />
+        <PlanList
+          link={routes.ACTIVE_PLANS}
+          plans={plans}
+          title="Active Plans"
+        />
         <WorkoutCard
           date="2025-03-01"
           header="Next workout"
           image="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600"
-          link="workout/#"
+          link="workout/"
           plan="StrongLifts"
           title="Full body workout"
           variant="accent"

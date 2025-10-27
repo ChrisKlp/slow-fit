@@ -1,7 +1,7 @@
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { CardHeader } from "./card-header";
+import { CardHeader } from "./common/card-header";
 
 type WorkoutCardProps = {
   header: string;

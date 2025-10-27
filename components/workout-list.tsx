@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Workout } from "@/lib/mockData/workouts";
-import { CardHeader } from "./card-header";
+import { CardHeader } from "./common/card-header";
 
 type WorkoutListProps = {
   title: string;

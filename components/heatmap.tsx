@@ -24,7 +24,7 @@ import type {
   WorkoutSessionStatus,
 } from "@/lib/mockData/workout-sessions";
 import { cn } from "@/lib/utils";
-import { CardHeader } from "./card-header";
+import { CardHeader } from "./common/card-header";
 
 export function Heatmap({ workouts }: { workouts: WorkoutSession[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);

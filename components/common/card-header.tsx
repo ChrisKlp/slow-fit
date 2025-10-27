@@ -5,6 +5,7 @@ type CardHeaderProps = {
   title: string;
   link?: string;
   className?: string;
+  variant?: "default" | "primary" | "secondary";
 };
 
 export function CardHeader({ title, link, className }: CardHeaderProps) {

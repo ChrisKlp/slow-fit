@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Home, Inbox, LogIn, Search, Settings } from "lucide-react";
+import Link from "next/link";
 import {
   Sidebar,
   SidebarContent,
@@ -12,42 +12,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { navigationItems } from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-  {
-    title: "Login",
-    url: "/login",
-    icon: LogIn,
-  },
-];
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -65,13 +32,13 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild size="lg" tooltip={item.title}>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

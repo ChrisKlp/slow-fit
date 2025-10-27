@@ -1,7 +1,7 @@
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import type { Plan } from "@/lib/mockData/plans";
-import { CardHeader } from "./card-header";
+import { CardHeader } from "./common/card-header";
 import { Badge } from "./ui/badge";
 
 type PlanListProps = {
