@@ -1,15 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Workout } from "@/lib/mockData/workouts";
+import type { WorkoutSession } from "@/lib/mockData/workout-sessions";
+import { workouts as workoutsList } from "@/lib/mockData/workouts";
 import { CardHeader } from "./common/card-header";
 
-type WorkoutListProps = {
+type WorkoutSessionListProps = {
   title: string;
   link?: string;
-  workouts: Workout[];
+  workouts: WorkoutSession[];
 };
 
-export function WorkoutList({ title, link, workouts }: WorkoutListProps) {
+export function WorkoutSessionList({
+  title,
+  link,
+  workouts,
+}: WorkoutSessionListProps) {
   return (
     <div className="card overflow-hidden p-0">
       <CardHeader link={link} title={title} />
@@ -19,24 +24,27 @@ export function WorkoutList({ title, link, workouts }: WorkoutListProps) {
           <span>Plan</span>
           <span>Date</span>
         </div>
-        {workouts.map((workout, index) => (
+        {workouts.map((workout) => (
           <Link
             className="grid grid-cols-4 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70"
-            href={`/workout/${workout.title}`}
-            key={`${workout.title}-${index}`}
+            href={`/workout/${workout.name}`}
+            key={workout.id}
           >
             <div className="col-span-2 flex items-center gap-4">
               <Image
-                alt={workout.title}
+                alt={workout.name}
                 className="size-8 rounded-full"
                 height={100}
-                src={workout.image}
+                src={
+                  workoutsList.find((w) => w.id === workout.workoutId)
+                    ?.coverImage ?? ""
+                }
                 width={100}
               />
-              <span>{workout.title}</span>
+              <span>{workout.name}</span>
             </div>
             <span>
-              <span>{workout.program}</span>
+              <span>{workout.planName}</span>
             </span>
             <span className="text-muted-foreground">{workout.date}</span>
           </Link>

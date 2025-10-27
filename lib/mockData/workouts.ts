@@ -1,72 +1,53 @@
-export const workouts = [
-  {
-    title: "Full body workout",
-    date: "2025-03-01",
-    program: "StrongLifts",
-    image:
-      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
-  },
-  {
-    title: "Upper body workout",
-    date: "2025-03-02",
-    program: "Workout Buddies",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
-  },
-  {
-    title: "Lower body workout",
-    date: "2025-03-03",
-    program: "Lazy Body",
-    image:
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
-  },
-  {
-    title: "Full body workout",
-    date: "2025-03-01",
-    program: "StrongLifts",
-    image:
-      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
-  },
-  {
-    title: "Upper body workout",
-    date: "2025-03-02",
-    program: "Workout Buddies",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
-  },
-  {
-    title: "Lower body workout",
-    date: "2025-03-03",
-    program: "Lazy Body",
-    image:
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
-  },
-  {
-    title: "Full body workout",
-    date: "2025-03-01",
-    program: "StrongLifts",
-    image:
-      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
-  },
-  {
-    title: "Upper body workout",
-    date: "2025-03-02",
-    program: "Workout Buddies",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
-  },
-  {
-    title: "Lower body workout",
-    date: "2025-03-03",
-    program: "Lazy Body",
-    image:
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
-  },
-];
+import { type PlannedExercise, plannedExercises } from "./planned-exercises";
 
 export type Workout = {
-  title: string;
-  date: string;
-  program: string;
-  image: string;
+  id: string;
+  name: string;
+  coverImage: string;
+  exercises: PlannedExercise[];
 };
+
+export const workouts: Workout[] = [
+  {
+    id: "w-1",
+    name: "Full body workout",
+    coverImage:
+      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
+    exercises: plannedExercises.slice(0, 2),
+  },
+  {
+    id: "w-2",
+    name: "Upper body workout",
+    coverImage:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
+    exercises: plannedExercises.slice(2, 4),
+  },
+  {
+    id: "w-3",
+    name: "Lower body workout",
+    coverImage:
+      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
+    exercises: plannedExercises.slice(4, 6),
+  },
+  {
+    id: "w-4",
+    name: "Full body workout - Advanced",
+    coverImage:
+      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
+    exercises: plannedExercises.slice(0, 3),
+  },
+  {
+    id: "w-5",
+    name: "Upper body workout - Advanced",
+    coverImage:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
+    exercises: plannedExercises.slice(3, 6),
+  },
+  {
+    id: "w-6",
+    name: "Lower body workout - Advanced",
+    coverImage:
+      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
+    exercises: plannedExercises.slice(2, 5),
+  },
+];

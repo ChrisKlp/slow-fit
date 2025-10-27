@@ -3,9 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
-import { WorkoutList } from "@/components/workout-list";
+import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
-import { workouts } from "@/lib/mockData/workouts";
 import { routes } from "@/lib/navigation-items";
 import { ActivePlanCard } from "../active-plan-card";
 
@@ -37,7 +36,10 @@ export default async function ActivePlanPage({ params }: ActivePlanPageProps) {
       </PageHeader>
       <div className="space-y-6">
         <ActivePlanCard headless plan={activePlan} />
-        <WorkoutList title="Scheduled workouts" workouts={workouts} />
+        <WorkoutSessionList
+          title="Scheduled workouts"
+          workouts={activePlan.workoutSessions}
+        />
       </div>
     </>
   );

@@ -3,10 +3,9 @@ import { Heatmap } from "@/components/heatmap";
 import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
-import { WorkoutList } from "@/components/workout-list";
+import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
-import { workoutSessions } from "@/lib/mockData/workout-sessions";
-import { workouts } from "@/lib/mockData/workouts";
+import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
 import { routes } from "@/lib/navigation-items";
 
 export default function HomePage() {
@@ -27,13 +26,17 @@ export default function HomePage() {
           variant="teal"
         />
         <div className="col-span-3 grid gap-4">
-          <Heatmap workouts={workoutSessions} />
-          <WorkoutList
+          <Heatmap workouts={allWorkoutSessions} />
+          <WorkoutSessionList
             link="history"
             title="Scheduled Workouts"
-            workouts={workouts.slice(0, 3)}
+            workouts={allWorkoutSessions.slice(0, 5)}
           />
-          <WorkoutList link="history/#" title="History" workouts={workouts} />
+          <WorkoutSessionList
+            link="history/#"
+            title="History"
+            workouts={allWorkoutSessions.slice(5, 10)}
+          />
         </div>
       </div>
       <div className="col-span-1 grid gap-4">
