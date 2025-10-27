@@ -4,7 +4,7 @@ import { Icon } from "./icon";
 
 type InfoItemProps = {
   label: string;
-  value: string;
+  value: string | number;
   icon: LucideIcon;
   variant?: "default" | "primary" | "secondary";
   className?: string;

@@ -1,37 +1,81 @@
-import { Calendar } from "lucide-react";
+import {
+  Calendar,
+  Dumbbell,
+  Hourglass,
+  Plus,
+  SquareCheckBig,
+  TrendingUp,
+} from "lucide-react";
+import Link from "next/link";
 import { InfoItem } from "@/components/common/info-item";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { activePlans } from "@/lib/active-plans";
+import { routes } from "@/lib/navigation-items";
+import { ActivePlanMoreMenu } from "./active-plan-more-menu";
 
 export default function ActivePlansPage() {
   return (
     <>
-      <h1 className="mb-8 font-semibold text-3xl">Active Plans</h1>
-      <div className="card p-6">
-        <h2 className="mb-6 font-semibold text-xl">StrongLifts</h2>
-        <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <InfoItem icon={Calendar} label="Start" value="2025-03-01" />
-          <InfoItem icon={Calendar} label="Finish" value="2025-03-01" />
-          <InfoItem icon={Calendar} label="Total" value="40" />
-          <InfoItem
-            icon={Calendar}
-            label="Completed"
-            value="29"
-            variant="secondary"
-          />
-          <InfoItem
-            icon={Calendar}
-            label="Remaining"
-            value="11"
-            variant="primary"
-          />
-          <InfoItem
-            icon={Calendar}
-            label="Progress"
-            value="60%"
-            variant="secondary"
-          />
-        </div>
-        <Progress className="h-2" value={60} />
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="font-semibold text-3xl">Active Plans</h1>
+        <Button variant="outline">
+          <Plus />
+          Add Plan
+        </Button>
+      </div>
+      <div className="grid gap-6">
+        {activePlans.map((plan) => {
+          const progress = Math.round(
+            (plan.completedSessions / plan.totalSessions) * 100
+          );
+          return (
+            <div className="card p-6" key={plan.id}>
+              <div className="mb-6 flex items-center justify-between">
+                <Link href={`${routes.ACTIVE_PLANS}/${plan.id}`}>
+                  <h2 className="font-semibold text-xl">{plan.name}</h2>
+                </Link>
+                <ActivePlanMoreMenu planId={plan.id} />
+              </div>
+              <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <InfoItem
+                  icon={Calendar}
+                  label="Start"
+                  value={plan.startDate}
+                />
+                <InfoItem
+                  icon={Calendar}
+                  label="Finish"
+                  value={plan.finishDate}
+                />
+                <InfoItem
+                  icon={Dumbbell}
+                  label="Total"
+                  value={plan.totalSessions}
+                />
+                <InfoItem
+                  icon={SquareCheckBig}
+                  label="Completed"
+                  value={plan.completedSessions}
+                  variant="secondary"
+                />
+                <InfoItem
+                  icon={Hourglass}
+                  label="Remaining"
+                  value={plan.remainingSessions}
+                  variant="primary"
+                />
+                <InfoItem
+                  icon={TrendingUp}
+                  label="Progress"
+                  value={`${progress}%`}
+                  variant="secondary"
+                />
+              </div>
+              <Progress className="h-2" value={progress} />
+            </div>
+          );
+        })}
       </div>
     </>
   );
