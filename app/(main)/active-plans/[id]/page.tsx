@@ -20,6 +20,10 @@ export default async function ActivePlanPage({ params }: ActivePlanPageProps) {
     notFound();
   }
 
+  const sortedWorkouts = activePlan.workoutSessions.sort((a, b) =>
+    a.date.localeCompare(b.date)
+  );
+
   return (
     <>
       <PageHeader subTitle="Active plan" title={activePlan.name}>
@@ -38,7 +42,7 @@ export default async function ActivePlanPage({ params }: ActivePlanPageProps) {
         <ActivePlanCard headless plan={activePlan} />
         <WorkoutSessionList
           title="Scheduled workouts"
-          workouts={activePlan.workoutSessions}
+          workouts={sortedWorkouts}
         />
       </div>
     </>

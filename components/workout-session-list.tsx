@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { WorkoutSession } from "@/lib/mockData/workout-sessions";
+import type {
+  WorkoutSession,
+  WorkoutSessionStatus,
+} from "@/lib/mockData/workout-sessions";
 import { workouts as workoutsList } from "@/lib/mockData/workouts";
 import { CardHeader } from "./common/card-header";
+import { Badge } from "./ui/badge";
 
 type WorkoutSessionListProps = {
   title: string;
@@ -15,18 +19,32 @@ export function WorkoutSessionList({
   link,
   workouts,
 }: WorkoutSessionListProps) {
+  function getBadgeVariant(status: WorkoutSessionStatus) {
+    switch (status) {
+      case "completed":
+        return "success";
+      case "scheduled":
+        return "primary";
+      case "missed":
+        return "destructive";
+      default:
+        return "outline";
+    }
+  }
+
   return (
     <div className="card overflow-hidden p-0">
       <CardHeader link={link} title={title} />
       <div className="grid items-center">
-        <div className="grid grid-cols-4 items-center gap-4 bg-muted px-6 py-3 text-muted-foreground text-sm">
+        <div className="grid grid-cols-5 items-center gap-4 bg-muted px-6 py-3 text-muted-foreground text-sm">
           <span className="col-span-2">Name</span>
           <span>Plan</span>
           <span>Date</span>
+          <span>Status</span>
         </div>
         {workouts.map((workout) => (
           <Link
-            className="grid grid-cols-4 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70"
+            className="grid grid-cols-5 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70"
             href={`/workout/${workout.name}`}
             key={workout.id}
           >
@@ -47,6 +65,14 @@ export function WorkoutSessionList({
               <span>{workout.planName}</span>
             </span>
             <span className="text-muted-foreground">{workout.date}</span>
+            <span>
+              <Badge
+                className="text-xs"
+                variant={getBadgeVariant(workout.status)}
+              >
+                {workout.status}
+              </Badge>
+            </span>
           </Link>
         ))}
       </div>
