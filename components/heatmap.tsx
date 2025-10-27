@@ -17,27 +17,26 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { dayLabels } from "@/constants/calendar";
+import { dayLetters } from "@/constants/calendar";
 import { getSurroundingMonthsPeriod } from "@/lib/calendar-utils";
+import type {
+  WorkoutSession,
+  WorkoutSessionStatus,
+} from "@/lib/mockData/workout-sessions";
 import { cn } from "@/lib/utils";
 import { CardHeader } from "./card-header";
 
-type Workout = {
-  date: string;
-  type: "completed" | "scheduled";
-};
-
-export function Heatmap({ workouts }: { workouts: Workout[] }) {
+export function Heatmap({ workouts }: { workouts: WorkoutSession[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { weeks, workoutMap, monthLabels } = useMemo(() => {
     const { endDate, firstSunday } = getSurroundingMonthsPeriod(6);
 
     // Create workout map for quick lookup
-    const map = new Map<string, "completed" | "scheduled">();
+    const map = new Map<string, WorkoutSessionStatus>();
 
     for (const w of workouts) {
-      map.set(w.date, w.type);
+      map.set(w.date, w.status);
     }
 
     // Generate weeks array
@@ -83,7 +82,7 @@ export function Heatmap({ workouts }: { workouts: Workout[] }) {
     const el = scrollRef.current;
     if (el) {
       const middle = (el.scrollWidth - el.clientWidth) / 2;
-      el.scrollTo({ left: middle, behavior: "smooth" });
+      el.scrollLeft = middle;
     }
   }, []);
 
@@ -97,11 +96,11 @@ export function Heatmap({ workouts }: { workouts: Workout[] }) {
             ref={scrollRef}
           >
             {/* Day labels */}
-            <div className="sticky left-0 h-full content-end space-y-1 bg-card pr-4">
-              {dayLabels.map((dayLabel) => (
+            <div className="sticky left-0 h-full content-end space-y-1 bg-card pr-2">
+              {dayLetters.map((dayLabel, index) => (
                 <span
-                  className="flex h-4 items-center justify-end text-muted-foreground text-xs"
-                  key={dayLabel}
+                  className="flex h-4 items-center text-muted-foreground text-xs"
+                  key={`${dayLabel}-${index}`}
                 >
                   {dayLabel}
                 </span>
@@ -136,20 +135,16 @@ export function Heatmap({ workouts }: { workouts: Workout[] }) {
                       const status = getDayStatus(date);
                       const today = isToday(date);
                       const dateStr = format(date, "yyyy-MM-dd");
-                      const statusText = status
-                        ? `${status.charAt(0).toUpperCase() + status.slice(1)}`
-                        : undefined;
-
                       return (
                         <Tooltip delayDuration={0} key={dayIdx}>
                           <TooltipTrigger asChild>
                             <div
                               className={cn(
-                                "size-4 cursor-pointer rounded-sm transition-all hover:ring-2 hover:ring-foreground/50",
+                                "size-4 cursor-pointer rounded-xs border border-border bg-muted/30 transition-all hover:ring-2 hover:ring-foreground/50",
                                 {
-                                  "bg-emerald-500": status === "completed",
-                                  "bg-blue-500": status === "scheduled",
-                                  "border border-border bg-muted/30": !status,
+                                  "bg-emerald-500/70": status === "completed",
+                                  "bg-blue-500/70": status === "scheduled",
+                                  "bg-red-500/30": status === "missed",
                                 },
                                 today && "ring-2 ring-foreground"
                               )}
@@ -157,10 +152,8 @@ export function Heatmap({ workouts }: { workouts: Workout[] }) {
                           </TooltipTrigger>
                           <TooltipContent className="grid">
                             <span>{dateStr}</span>
-                            {statusText && (
-                              <span className="font-semibold">
-                                {statusText}
-                              </span>
+                            {status && (
+                              <span className="font-semibold">{status}</span>
                             )}
                           </TooltipContent>
                         </Tooltip>

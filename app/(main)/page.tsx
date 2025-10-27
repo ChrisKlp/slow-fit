@@ -5,7 +5,7 @@ import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
 import { plans } from "@/lib/mockData/plans";
-import { workoutsHeatmap } from "@/lib/mockData/workout-heatmap";
+import { workoutSessions } from "@/lib/mockData/workout-sessions";
 import { workouts } from "@/lib/mockData/workouts";
 
 export default function HomePage() {
@@ -13,12 +13,12 @@ export default function HomePage() {
     <div className="grid grid-cols-3 items-start gap-6">
       <div className="col-span-2 grid grid-cols-3 gap-4">
         <SmallStat
-          content="15"
-          description="Completed"
-          Icon={SquareCheckBig}
+          content="20"
+          description="To Go"
+          Icon={Hourglass}
           variant="primary"
         />
-        <SmallStat content="20" description="To Go" Icon={Hourglass} />
+        <SmallStat content="15" description="Completed" Icon={SquareCheckBig} />
         <SmallStat
           content="46%"
           description="Progress"
@@ -26,7 +26,7 @@ export default function HomePage() {
           variant="teal"
         />
         <div className="col-span-3 grid gap-4">
-          <Heatmap workouts={workoutsHeatmap} />
+          <Heatmap workouts={workoutSessions} />
           <WorkoutList
             link="history/#"
             title="Scheduled Workouts"
