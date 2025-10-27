@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { InfoItem } from "@/components/common/info-item";
+import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { activePlans } from "@/lib/active-plans";
@@ -17,13 +18,12 @@ import { ActivePlanMoreMenu } from "./active-plan-more-menu";
 export default function ActivePlansPage() {
   return (
     <>
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="font-semibold text-3xl">Active Plans</h1>
+      <PageHeader subTitle="Manage your active plans" title="Active Plans">
         <Button variant="outline">
           <Plus />
           Add Plan
         </Button>
-      </div>
+      </PageHeader>
       <div className="grid gap-6">
         {activePlans.map((plan) => {
           const progress = Math.round(

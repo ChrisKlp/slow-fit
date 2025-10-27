@@ -12,7 +12,9 @@ export default function MainLayout({
       <AppSidebar />
       <div className="w-full">
         <AppBar />
-        <main className="container mx-auto p-4 md:p-6">{children}</main>
+        <main className="container mx-auto p-4 md:p-6 md:py-10">
+          {children}
+        </main>
       </div>
     </SidebarProvider>
   );
