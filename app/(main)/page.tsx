@@ -4,7 +4,7 @@ import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutList } from "@/components/workout-list";
-import { plans } from "@/lib/mockData/plans";
+import { activePlans } from "@/lib/mockData/active-plans";
 import { workoutSessions } from "@/lib/mockData/workout-sessions";
 import { workouts } from "@/lib/mockData/workouts";
 import { routes } from "@/lib/navigation-items";
@@ -39,7 +39,7 @@ export default function HomePage() {
       <div className="col-span-1 grid gap-4">
         <PlanList
           link={routes.ACTIVE_PLANS}
-          plans={plans}
+          plans={activePlans}
           title="Active Plans"
         />
         <WorkoutCard

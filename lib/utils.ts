@@ -4,3 +4,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function getProgress(value: number, max: number) {
+  return Math.round((value / max) * 100);
+}
