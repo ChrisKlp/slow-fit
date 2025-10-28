@@ -1,10 +1,11 @@
 import { Activity, Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
-import { EditDeleteGroupButton } from "@/components/common/edit-delete-group-button";
 import { InfoItem } from "@/components/common/info-item";
 import { StatusInfoItem } from "@/components/common/status-info-item";
 import { YoutubeCard } from "@/components/common/youtube-card";
 import { PageHeader } from "@/components/page-header";
+import { CompleteSessionButton } from "@/components/workoutSession/complete-session-button";
+import { SingleSessionOptionsMenu } from "@/components/workoutSession/workout-session-opions-menu";
 import { exercises } from "@/lib/mockData/exercises";
 import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
 import { workouts } from "@/lib/mockData/workouts";
@@ -36,11 +37,12 @@ export default async function SingleWorkoutSessionPage({
   return (
     <>
       <PageHeader subTitle="Workout Session" title={workoutSession.name}>
-        <EditDeleteGroupButton
-          editHref={`${routes.WORKOUT_SESSIONS}/${workoutSession.id}/edit`}
-          editLabel="Edit session"
-          id={workoutSession.id}
-        />
+        <div className="flex items-center gap-2">
+          {workoutSession.status !== "completed" && (
+            <CompleteSessionButton sessionId={workoutSession.id} />
+          )}
+          <SingleSessionOptionsMenu sessionId={workoutSession.id} />
+        </div>
       </PageHeader>
       <div className="space-y-6">
         <div className="card grid grid-cols-2 gap-4 p-6 md:grid-cols-2 lg:grid-cols-3">
@@ -73,7 +75,7 @@ export default async function SingleWorkoutSessionPage({
               <h3 className="mb-4 font-bold text-xl">
                 {plannedExercises[0].exercise?.name}
               </h3>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
                 {plannedExercises[0].exercise?.videoUrl && (
                   <YoutubeCard
                     description={plannedExercises[0].exercise?.description}

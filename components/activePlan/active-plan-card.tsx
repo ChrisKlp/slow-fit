@@ -11,7 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import type { ActivePlan } from "@/lib/mockData/active-plans";
 import { routes } from "@/lib/navigation-items";
 import { getProgress } from "@/lib/utils";
-import { ActivePlanMoreMenu } from "./active-plan-more-menu";
+import { ActivePlanOptionsMenu } from "./active-plan-options-menu";
 
 type ActivePlanCardProps = {
   plan: ActivePlan;
@@ -30,7 +30,7 @@ export function ActivePlanCard({
           <Link href={`${routes.ACTIVE_PLANS}/${plan.id}`}>
             <h2 className="font-semibold text-xl">{plan.name}</h2>
           </Link>
-          <ActivePlanMoreMenu planId={plan.id} />
+          <ActivePlanOptionsMenu planId={plan.id} />
         </div>
       )}
       <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
