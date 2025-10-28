@@ -22,8 +22,8 @@ export function Breadcrumbs({ list = [] }: BreadcrumbsProps) {
           <BreadcrumbLink asChild>
             <Link href={routes.ROOT}>Home</Link>
           </BreadcrumbLink>
-          <BreadcrumbSeparator />
         </BreadcrumbItem>
+        <BreadcrumbSeparator />
         {list.map(({ title, href }) => (
           <BreadcrumbItem key={`${title}-${href}`}>
             {href ? (
