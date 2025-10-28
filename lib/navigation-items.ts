@@ -6,6 +6,7 @@ export const routes = {
   WORKOUT_SESSIONS: "/workout-sessions",
   PLANS: "/plans",
   WORKOUTS: "/workouts",
+  EXERCISES: "/exercises",
   LOGIN: "/login",
 } as const;
 
@@ -38,6 +39,7 @@ export const secondaryNavigationItems = [
     url: routes.WORKOUTS,
     icon: List,
   },
+  { title: "Exercises", url: routes.EXERCISES, icon: List },
   {
     title: "Login",
     url: routes.LOGIN,

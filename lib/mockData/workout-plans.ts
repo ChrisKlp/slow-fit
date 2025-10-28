@@ -28,7 +28,7 @@ export const workoutPlans: WorkoutPlan[] = [
     name: "Workout Buddies",
     coverImage:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600",
-    totalSessions: 12,
+    totalSessions: 20,
     weekPattern: ["W", "W", "R", "R", "W", "W", "R"],
     workouts: ["w-5", "w-6"],
     schedule: ["w-5", "w-5", "w-5", "w-6", "w-6", "w-6"],
@@ -38,7 +38,7 @@ export const workoutPlans: WorkoutPlan[] = [
     name: "Lazy Body",
     coverImage:
       "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1600",
-    totalSessions: 12,
+    totalSessions: 18,
     weekPattern: ["W", "W", "W", "R", "R", "R", "R"],
     workouts: ["w-1", "w-2", "w-3", "w-4", "w-5", "w-6"],
     schedule: [
