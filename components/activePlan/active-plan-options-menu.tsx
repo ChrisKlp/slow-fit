@@ -1,5 +1,6 @@
 "use client";
 
+import { logger } from "@/lib/logger";
 import { routes } from "@/lib/navigation-items";
 import { DefaultOptionsMenu } from "../common/options-menu";
 
@@ -13,7 +14,7 @@ export function ActivePlanOptionsMenu({ planId }: ActivePlanOptionsMenuProps) {
       editHref={`${routes.ACTIVE_PLANS}/${planId}/edit`}
       editLabel="Edit plan"
       onDelete={() => {
-        console.log("Delete plan", planId);
+        logger.info(`Delete plan ${planId}`);
       }}
       variant="ghost"
       viewHref={`${routes.ACTIVE_PLANS}/${planId}`}
@@ -30,7 +31,7 @@ export function SingleActivePlanOptionsMenu({
       editHref={`${routes.ACTIVE_PLANS}/${planId}/edit`}
       editLabel="Edit plan"
       onDelete={() => {
-        console.log("Delete plan", planId);
+        logger.info(`Delete single plan ${planId}`);
       }}
     />
   );
