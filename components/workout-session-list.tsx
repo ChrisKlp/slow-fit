@@ -5,6 +5,7 @@ import type {
   WorkoutSessionStatus,
 } from "@/lib/mockData/workout-sessions";
 import { workouts as workoutsList } from "@/lib/mockData/workouts";
+import { routes } from "@/lib/navigation-items";
 import { CardHeader } from "./common/card-header";
 import { Badge } from "./ui/badge";
 
@@ -45,7 +46,7 @@ export function WorkoutSessionList({
         {workouts.map((workout) => (
           <Link
             className="grid grid-cols-5 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70"
-            href={`/workout/${workout.name}`}
+            href={`${routes.WORKOUT_SESSIONS}/${workout.id}`}
             key={workout.id}
           >
             <div className="col-span-2 flex items-center gap-4">

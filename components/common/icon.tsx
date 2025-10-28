@@ -3,17 +3,29 @@ import { cn } from "@/lib/utils";
 
 type IconProps = {
   icon: LucideIcon;
-  variant?: "default" | "primary" | "secondary";
+  link?: boolean;
+  variant?: "default" | "primary" | "secondary" | "destructive";
 };
 
-export function Icon({ icon: IconComponent, variant = "default" }: IconProps) {
+export function Icon({
+  icon: IconComponent,
+  link,
+  variant = "default",
+}: IconProps) {
   return (
     <div
       className={cn(
-        "grid size-10 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground",
+        "grid size-10 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground transition-colors",
         {
           "bg-blue-600/20 text-blue-400": variant === "primary",
           "bg-teal-600/20 text-teal-400": variant === "secondary",
+          "bg-red-600/20 text-red-400": variant === "destructive",
+        },
+        link && "group-hover:bg-muted-foreground/20",
+        link && {
+          "group-hover:bg-blue-600/40": variant === "primary",
+          "group-hover:bg-teal-600/40": variant === "secondary",
+          "group-hover:bg-red-600/40": variant === "destructive",
         }
       )}
     >
