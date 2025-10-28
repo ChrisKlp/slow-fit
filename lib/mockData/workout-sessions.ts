@@ -1,3 +1,5 @@
+import { isPastDate } from "../calendar-utils";
+
 export type WorkoutSessionStatus = "completed" | "scheduled" | "missed";
 
 export type WorkoutSession = {
@@ -10,7 +12,7 @@ export type WorkoutSession = {
   planName: string;
 };
 
-export const allWorkoutSessions: WorkoutSession[] = [
+const sessions: WorkoutSession[] = [
   {
     id: "ws-1",
     name: "Full body workout",
@@ -33,7 +35,7 @@ export const allWorkoutSessions: WorkoutSession[] = [
     id: "ws-3",
     name: "Lower body workout",
     date: "2025-08-03",
-    status: "missed",
+    status: "scheduled",
     workoutId: "w-3",
     activePlanId: "ap-3",
     planName: "Lazy Body",
@@ -51,7 +53,7 @@ export const allWorkoutSessions: WorkoutSession[] = [
     id: "ws-5",
     name: "Upper body workout - Advanced",
     date: "2025-08-10",
-    status: "missed",
+    status: "scheduled",
     workoutId: "w-5",
     activePlanId: "ap-2",
     planName: "Workout Buddies",
@@ -78,7 +80,7 @@ export const allWorkoutSessions: WorkoutSession[] = [
     id: "ws-8",
     name: "Upper body workout - Advanced",
     date: "2025-08-25",
-    status: "missed",
+    status: "scheduled",
     workoutId: "w-5",
     activePlanId: "ap-2",
     planName: "Workout Buddies",
@@ -159,7 +161,7 @@ export const allWorkoutSessions: WorkoutSession[] = [
     id: "ws-17",
     name: "Upper body workout - Advanced",
     date: "2025-10-05",
-    status: "missed",
+    status: "scheduled",
     workoutId: "w-5",
     activePlanId: "ap-2",
     planName: "Workout Buddies",
@@ -186,7 +188,7 @@ export const allWorkoutSessions: WorkoutSession[] = [
     id: "ws-20",
     name: "Upper body workout",
     date: "2025-10-20",
-    status: "missed",
+    status: "scheduled",
     workoutId: "w-2",
     activePlanId: "ap-2",
     planName: "Workout Buddies",
@@ -372,6 +374,22 @@ export const allWorkoutSessions: WorkoutSession[] = [
     planName: "Strong Lifts",
   },
 ];
+
+export const allWorkoutSessions: WorkoutSession[] = sessions.map((session) => {
+  const isMissed = isPastDate(session.date) && session.status !== "completed";
+  return {
+    ...session,
+    status: isMissed ? "missed" : session.status,
+  };
+});
+
+export const allPastSessions: WorkoutSession[] = allWorkoutSessions.filter(
+  (session) => isPastDate(session.date)
+);
+
+export const allFutureSessions: WorkoutSession[] = allWorkoutSessions.filter(
+  (session) => !isPastDate(session.date)
+);
 
 export const strongLiftsSessions: WorkoutSession[] = allWorkoutSessions.filter(
   (session) => session.planName === "Strong Lifts"

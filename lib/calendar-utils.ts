@@ -1,6 +1,9 @@
 import {
   addMonths,
   endOfMonth,
+  isBefore,
+  parseISO,
+  startOfDay,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -13,4 +16,10 @@ export function getSurroundingMonthsPeriod(monthRange = 3) {
   const firstSunday = startOfWeek(startDate, { weekStartsOn: 0 });
 
   return { startDate, endDate, firstSunday };
+}
+
+export function isPastDate(date: string) {
+  const today = startOfDay(new Date());
+  const sessionDate = startOfDay(parseISO(date));
+  return isBefore(sessionDate, today);
 }

@@ -2,7 +2,7 @@ type PageHeaderProps = {
   title: string;
   subTitle?: string;
   badge?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export function PageHeader({ title, subTitle, children }: PageHeaderProps) {

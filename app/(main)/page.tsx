@@ -5,7 +5,11 @@ import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
-import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
+import {
+  allFutureSessions,
+  allPastSessions,
+  allWorkoutSessions,
+} from "@/lib/mockData/workout-sessions";
 import { routes } from "@/lib/navigation-items";
 
 export default function HomePage() {
@@ -30,12 +34,12 @@ export default function HomePage() {
           <WorkoutSessionList
             link="history"
             title="Scheduled Workouts"
-            workouts={allWorkoutSessions.slice(0, 5)}
+            workouts={allFutureSessions.slice(0, 5)}
           />
           <WorkoutSessionList
             link="history/#"
             title="History"
-            workouts={allWorkoutSessions.slice(5, 10)}
+            workouts={allPastSessions.slice(0, 5)}
           />
         </div>
       </div>

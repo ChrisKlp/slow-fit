@@ -1,15 +1,9 @@
-import {
-  Activity,
-  Calendar,
-  Home,
-  LogIn,
-  Search,
-  Settings,
-} from "lucide-react";
+import { Activity, Home, LogIn, Search, Settings, Timer } from "lucide-react";
 
 export const routes = {
   ROOT: "/",
   ACTIVE_PLANS: "/active-plans",
+  WORKOUT_SESSIONS: "/workout-sessions",
   LOGIN: "/login",
 } as const;
 
@@ -25,9 +19,9 @@ export const navigationItems = [
     icon: Activity,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Sessions",
+    url: routes.WORKOUT_SESSIONS,
+    icon: Timer,
   },
   {
     title: "Search",
