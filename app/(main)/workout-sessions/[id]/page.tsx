@@ -36,7 +36,17 @@ export default async function SingleWorkoutSessionPage({
 
   return (
     <>
-      <PageHeader subTitle="Workout Session" title={workoutSession.name}>
+      <PageHeader
+        breadcrumbs={[
+          { title: "Active Plans", href: routes.ACTIVE_PLANS },
+          {
+            title: workoutSession.planName,
+            href: `/active-plans/${workoutSession.activePlanId}`,
+          },
+          { title: workoutSession.name },
+        ]}
+        title={workoutSession.name}
+      >
         <div className="flex items-center gap-2">
           {workoutSession.status !== "completed" && (
             <CompleteSessionButton sessionId={workoutSession.id} />

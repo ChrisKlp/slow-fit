@@ -4,6 +4,7 @@ import { SingleActivePlanOptionsMenu } from "@/components/activePlan/active-plan
 import { PageHeader } from "@/components/page-header";
 import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
+import { routes } from "@/lib/navigation-items";
 
 type ActivePlanPageProps = {
   params: Promise<{ id: string }>;
@@ -23,7 +24,13 @@ export default async function ActivePlanPage({ params }: ActivePlanPageProps) {
 
   return (
     <>
-      <PageHeader subTitle="Active plan" title={activePlan.name}>
+      <PageHeader
+        breadcrumbs={[
+          { title: "Active Plans", href: routes.ACTIVE_PLANS },
+          { title: activePlan.name },
+        ]}
+        title={activePlan.name}
+      >
         <SingleActivePlanOptionsMenu planId={activePlan.id} />
       </PageHeader>
       <div className="space-y-6">

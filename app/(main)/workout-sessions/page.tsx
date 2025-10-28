@@ -6,12 +6,12 @@ export default function WorkoutSessionsPage() {
   const sortedWorkouts = allWorkoutSessions.sort((a, b) =>
     a.date.localeCompare(b.date)
   );
+
+  const pageTitle = "Workout Sessions";
+
   return (
     <>
-      <PageHeader
-        subTitle="All your planned and completed workouts"
-        title="Workout Sessions"
-      />
+      <PageHeader breadcrumbs={[{ title: pageTitle }]} title={pageTitle} />
       <WorkoutSessionList title="Sessions" workouts={sortedWorkouts} />
     </>
   );

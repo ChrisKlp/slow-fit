@@ -1,20 +1,23 @@
+import type { BreadcrumbPathItem } from "@/types";
+import { Breadcrumbs } from "./common/breadcrumbs";
+
 type PageHeaderProps = {
   title: string;
-  subTitle?: string;
   badge?: string;
+  breadcrumbs?: BreadcrumbPathItem[];
   children?: React.ReactNode;
 };
 
-export function PageHeader({ title, subTitle, children }: PageHeaderProps) {
+export function PageHeader({ title, children, breadcrumbs }: PageHeaderProps) {
   return (
-    <div className="mb-8 flex items-center justify-between">
-      <div>
+    <div className="mb-8 space-y-6">
+      <Breadcrumbs list={breadcrumbs} />
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="font-semibold text-3xl">{title}</h1>
         </div>
-        <span className="text-muted-foreground">{subTitle}</span>
+        {children}
       </div>
-      {children}
     </div>
   );
 }

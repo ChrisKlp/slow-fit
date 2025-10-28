@@ -7,7 +7,10 @@ import { activePlans } from "@/lib/mockData/active-plans";
 export default function ActivePlansPage() {
   return (
     <>
-      <PageHeader subTitle="Manage your active plans" title="Active Plans">
+      <PageHeader
+        breadcrumbs={[{ title: "Active Plans" }]}
+        title="Active Plans"
+      >
         <Button variant="outline">
           <Plus />
           Add Plan
