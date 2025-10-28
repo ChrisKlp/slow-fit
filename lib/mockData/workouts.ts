@@ -13,7 +13,7 @@ export const workouts: Workout[] = [
     name: "Full body workout",
     coverImage:
       "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600",
-    exercises: plannedExercises.slice(0, 2),
+    exercises: plannedExercises.slice(0, 1),
   },
   {
     id: "w-2",
