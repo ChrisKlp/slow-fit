@@ -1,13 +1,15 @@
-import { Activity, Home, LogIn, Search, Settings, Timer } from "lucide-react";
+import { Activity, Home, List, LogIn, Timer } from "lucide-react";
 
 export const routes = {
   ROOT: "/",
   ACTIVE_PLANS: "/active-plans",
   WORKOUT_SESSIONS: "/workout-sessions",
+  PLANS: "/plans",
+  WORKOUTS: "/workouts",
   LOGIN: "/login",
 } as const;
 
-export const navigationItems = [
+export const mainNavigationItems = [
   {
     title: "Home",
     url: routes.ROOT,
@@ -23,15 +25,18 @@ export const navigationItems = [
     url: routes.WORKOUT_SESSIONS,
     icon: Timer,
   },
+];
+
+export const secondaryNavigationItems = [
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Plans",
+    url: routes.PLANS,
+    icon: List,
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Workouts",
+    url: routes.WORKOUTS,
+    icon: List,
   },
   {
     title: "Login",

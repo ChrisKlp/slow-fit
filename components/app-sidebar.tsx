@@ -12,9 +12,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { navigationItems } from "@/lib/navigation-items";
+import {
+  mainNavigationItems,
+  secondaryNavigationItems,
+} from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
+import { Separator } from "./ui/separator";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -32,7 +36,24 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => (
+              {mainNavigationItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild size="lg" tooltip={item.title}>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <Separator />
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {secondaryNavigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild size="lg" tooltip={item.title}>
                     <Link href={item.url}>
