@@ -4,7 +4,7 @@ import Link from "next/link";
 import { InfoItem } from "@/components/common/info-item";
 import type { WorkoutPlan } from "@/lib/mockData/workout-plans";
 import { routes } from "@/lib/navigation-items";
-import { getWeeksNumber } from "@/lib/utils";
+import { cn, getWeeksNumber } from "@/lib/utils";
 import { PlanOptionsMenu } from "./plan-options-menu";
 
 type PlanCardProps = {
@@ -22,7 +22,7 @@ export function PlanCard({ plan, headless = false }: PlanCardProps) {
         src={plan.coverImage}
         width={300}
       />
-      <div className="w-full p-6">
+      <div className={cn("w-full p-6", headless && "grid")}>
         {!headless && (
           <div className="mb-6 flex items-center justify-between">
             <Link href={`${routes.PLANS}/${plan.id}`}>

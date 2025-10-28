@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Fragment } from "react/jsx-runtime";
 import { routes } from "@/lib/navigation-items";
 import type { BreadcrumbPathItem } from "@/types";
 import {
@@ -24,20 +25,25 @@ export function Breadcrumbs({ list = [] }: BreadcrumbsProps) {
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        {list.map(({ title, href }) => (
-          <BreadcrumbItem key={`${title}-${href}`}>
-            {href ? (
-              <>
-                <BreadcrumbLink asChild>
-                  <Link href={href}>{title}</Link>
-                </BreadcrumbLink>
+        {list.map(({ title, href }) => {
+          if (href) {
+            return (
+              <Fragment key={`${title}-${href}`}>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href={href}>{title}</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
                 <BreadcrumbSeparator />
-              </>
-            ) : (
+              </Fragment>
+            );
+          }
+          return (
+            <BreadcrumbItem key={title}>
               <BreadcrumbPage>{title}</BreadcrumbPage>
-            )}
-          </BreadcrumbItem>
-        ))}
+            </BreadcrumbItem>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );
