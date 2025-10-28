@@ -1,12 +1,12 @@
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ActivePlanCard } from "@/components/activePlan/active-plan-card";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
 import { routes } from "@/lib/navigation-items";
-import { ActivePlanCard } from "../active-plan-card";
 
 type ActivePlanPageProps = {
   params: Promise<{ id: string }>;
@@ -41,7 +41,7 @@ export default async function ActivePlanPage({ params }: ActivePlanPageProps) {
       <div className="space-y-6">
         <ActivePlanCard headless plan={activePlan} />
         <WorkoutSessionList
-          title="Scheduled workouts"
+          title="Workout sessions"
           workouts={sortedWorkouts}
         />
       </div>

@@ -1,8 +1,8 @@
 import { Plus } from "lucide-react";
+import { ActivePlanCard } from "@/components/activePlan/active-plan-card";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { activePlans } from "@/lib/mockData/active-plans";
-import { ActivePlanCard } from "./active-plan-card";
 
 export default function ActivePlansPage() {
   return (
