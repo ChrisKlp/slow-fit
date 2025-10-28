@@ -2,9 +2,9 @@ import { Activity, Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
 import { InfoItem } from "@/components/common/info-item";
 import { StatusInfoItem } from "@/components/common/status-info-item";
-import { YoutubeCard } from "@/components/common/youtube-card";
 import { PageHeader } from "@/components/page-header";
 import { CompleteSessionButton } from "@/components/workoutSession/complete-session-button";
+import { VideoExercise } from "@/components/workoutSession/video-exercise";
 import { SingleSessionOptionsMenu } from "@/components/workoutSession/workout-session-opions-menu";
 import { exercises } from "@/lib/mockData/exercises";
 import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
@@ -60,7 +60,7 @@ export default async function SingleWorkoutSessionPage({
           plannedExercises.length > 0 &&
           (plannedExercises.length > 1 ? (
             <div className="card p-6">
-              <h3 className="mb-4 font-bold text-xl">Planned Exercises</h3>
+              <h3 className="mb-4 font-bold text-xl">Exercises:</h3>
               <ul>
                 {plannedExercises.map((plannedExercise) => (
                   <li key={plannedExercise.exerciseId}>
@@ -71,27 +71,9 @@ export default async function SingleWorkoutSessionPage({
               </ul>
             </div>
           ) : (
-            <div className="card p-6">
-              <h3 className="mb-4 font-bold text-xl">
-                {plannedExercises[0].exercise?.name}
-              </h3>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-                {plannedExercises[0].exercise?.videoUrl && (
-                  <YoutubeCard
-                    description={plannedExercises[0].exercise?.description}
-                    title={plannedExercises[0].exercise?.name}
-                    videoUrl={plannedExercises[0].exercise?.videoUrl}
-                  />
-                )}
-                {plannedExercises[0].exercise?.extraVideos?.[0] && (
-                  <YoutubeCard
-                    description="Exercise with description"
-                    title="Description"
-                    videoUrl={plannedExercises[0].exercise?.extraVideos?.[0]}
-                  />
-                )}
-              </div>
-            </div>
+            plannedExercises[0].exercise && (
+              <VideoExercise exercise={plannedExercises[0].exercise} />
+            )
           ))}
       </div>
     </>
