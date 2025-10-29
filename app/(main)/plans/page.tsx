@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/common/page-header";
 import { PlanCard } from "@/components/plans/plan-card";
 import { Button } from "@/components/ui/button";
 import { workoutPlans } from "@/lib/mockData/workout-plans";

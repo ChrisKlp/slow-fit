@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/common/page-header";
 import { PlanCard } from "@/components/plans/plan-card";
 import { SinglePlanOptionsMenu } from "@/components/plans/plan-options-menu";
 import { WorkoutList } from "@/components/workout-list";

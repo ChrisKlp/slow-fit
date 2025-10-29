@@ -1,14 +1,14 @@
-type YoutubeCardProps = {
+type ExerciseVideoProps = {
   videoUrl: string;
   title?: string;
   description?: string;
 };
 
-export function YoutubeCard({
+export function ExerciseVideo({
   videoUrl,
   title,
   description,
-}: YoutubeCardProps) {
+}: ExerciseVideoProps) {
   return (
     <div className="space-y-4">
       <div className="aspect-video overflow-hidden rounded-lg">

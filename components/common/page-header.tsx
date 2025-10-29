@@ -1,5 +1,5 @@
 import type { BreadcrumbPathItem } from "@/types";
-import { Breadcrumbs } from "./common/breadcrumbs";
+import { Breadcrumbs } from "./breadcrumbs";
 
 type PageHeaderProps = {
   title: string;

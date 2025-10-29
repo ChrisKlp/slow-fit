@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 import { ActivePlanCard } from "@/components/activePlan/active-plan-card";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
 import { activePlans } from "@/lib/mockData/active-plans";
 

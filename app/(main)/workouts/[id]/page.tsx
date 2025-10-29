@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import { PageHeader } from "@/components/common/page-header";
 import { ExerciseList } from "@/components/exercise-list";
-import { PageHeader } from "@/components/page-header";
+import { ExerciseVideoList } from "@/components/exercise-video-list";
 import { SingleWorkoutOptionsMenu } from "@/components/workout/workout-opions-menu";
 import { exercises } from "@/lib/mockData/exercises";
 import { workouts } from "@/lib/mockData/workouts";
@@ -44,7 +45,13 @@ export default async function SingleWorkoutPage({
             <ExerciseList exercises={plannedExercises} />
           ) : (
             plannedExercises[0].exercise && (
-              <ExerciseList exercises={plannedExercises} />
+              <>
+                <ExerciseList exercises={plannedExercises} />
+                <ExerciseVideoList
+                  exercise={plannedExercises[0].exercise}
+                  headless
+                />
+              </>
             )
           ))}
       </div>

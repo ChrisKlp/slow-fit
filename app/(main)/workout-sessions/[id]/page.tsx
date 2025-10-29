@@ -1,10 +1,11 @@
 import { Activity, Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
 import { InfoItem } from "@/components/common/info-item";
+import { PageHeader } from "@/components/common/page-header";
 import { StatusInfoItem } from "@/components/common/status-info-item";
-import { PageHeader } from "@/components/page-header";
+import { ExerciseList } from "@/components/exercise-list";
+import { ExerciseVideoList } from "@/components/exercise-video-list";
 import { CompleteSessionButton } from "@/components/workoutSession/complete-session-button";
-import { VideoExercise } from "@/components/workoutSession/video-exercise";
 import { SingleSessionOptionsMenu } from "@/components/workoutSession/workout-session-opions-menu";
 import { exercises } from "@/lib/mockData/exercises";
 import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
@@ -69,20 +70,16 @@ export default async function SingleWorkoutSessionPage({
           plannedExercises &&
           plannedExercises.length > 0 &&
           (plannedExercises.length > 1 ? (
-            <div className="card p-6">
-              <h3 className="mb-4 font-bold text-xl">Exercises:</h3>
-              <ul>
-                {plannedExercises.map((plannedExercise) => (
-                  <li key={plannedExercise.exerciseId}>
-                    {plannedExercise.exercise?.name} - {plannedExercise.sets}{" "}
-                    sets of {plannedExercise.reps} reps
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ExerciseList exercises={plannedExercises} />
           ) : (
             plannedExercises[0].exercise && (
-              <VideoExercise exercise={plannedExercises[0].exercise} />
+              <>
+                <ExerciseList exercises={plannedExercises} />
+                <ExerciseVideoList
+                  exercise={plannedExercises[0].exercise}
+                  headless
+                />
+              </>
             )
           ))}
       </div>

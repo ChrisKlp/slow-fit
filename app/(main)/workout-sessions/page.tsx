@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/common/page-header";
 import { WorkoutSessionList } from "@/components/workout-session-list";
 import { allWorkoutSessions } from "@/lib/mockData/workout-sessions";
 
