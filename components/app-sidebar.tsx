@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +15,8 @@ import {
 } from "@/components/ui/sidebar";
 import {
   mainNavigationItems,
+  type NavigationItem,
+  routes,
   secondaryNavigationItems,
 } from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
@@ -22,6 +25,7 @@ import { Separator } from "./ui/separator";
 
 export function AppSidebar() {
   const { state } = useSidebar();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader
@@ -33,40 +37,44 @@ export function AppSidebar() {
         <Logo variant={state !== "collapsed" ? "default" : "icon"} />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {mainNavigationItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="lg" tooltip={item.title}>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <SidebarGroupComponent items={mainNavigationItems} />
         <Separator />
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {secondaryNavigationItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="lg" tooltip={item.title}>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <SidebarGroupComponent items={secondaryNavigationItems} />
       </SidebarContent>
     </Sidebar>
+  );
+}
+
+function SidebarGroupComponent({ items }: { items: NavigationItem[] }) {
+  const pathname = usePathname();
+  return (
+    <SidebarGroup>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {items.map((item) => {
+            const isActive =
+              item.url === routes.ROOT
+                ? pathname === routes.ROOT
+                : pathname === item.url || pathname.startsWith(`${item.url}/`);
+
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive}
+                  size="lg"
+                  tooltip={item.title}
+                >
+                  <Link href={item.url}>
+                    <item.IconComponent />
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
   );
 }

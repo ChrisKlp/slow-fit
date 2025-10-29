@@ -1,4 +1,17 @@
-import { Activity, Home, List, LogIn, Timer } from "lucide-react";
+import {
+  Activity,
+  Home,
+  List,
+  LogIn,
+  type LucideIcon,
+  Timer,
+} from "lucide-react";
+
+export type NavigationItem = {
+  title: string;
+  url: string;
+  IconComponent: LucideIcon;
+};
 
 export const routes = {
   ROOT: "/",
@@ -10,39 +23,39 @@ export const routes = {
   LOGIN: "/login",
 } as const;
 
-export const mainNavigationItems = [
+export const mainNavigationItems: NavigationItem[] = [
   {
     title: "Home",
     url: routes.ROOT,
-    icon: Home,
+    IconComponent: Home,
   },
   {
     title: "Active Plans",
     url: routes.ACTIVE_PLANS,
-    icon: Activity,
+    IconComponent: Activity,
   },
   {
     title: "Sessions",
     url: routes.WORKOUT_SESSIONS,
-    icon: Timer,
+    IconComponent: Timer,
   },
 ];
 
-export const secondaryNavigationItems = [
+export const secondaryNavigationItems: NavigationItem[] = [
   {
     title: "Plans",
     url: routes.PLANS,
-    icon: List,
+    IconComponent: List,
   },
   {
     title: "Workouts",
     url: routes.WORKOUTS,
-    icon: List,
+    IconComponent: List,
   },
-  { title: "Exercises", url: routes.EXERCISES, icon: List },
+  { title: "Exercises", url: routes.EXERCISES, IconComponent: List },
   {
     title: "Login",
     url: routes.LOGIN,
-    icon: LogIn,
+    IconComponent: LogIn,
   },
 ];
