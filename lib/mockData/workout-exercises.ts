@@ -1,6 +1,6 @@
 import type { Exercise } from "./exercises";
 
-export type PlannedExercise = {
+export type WorkoutExercise = {
   id: string;
   workoutId: string;
   exerciseId: string;
@@ -11,11 +11,11 @@ export type PlannedExercise = {
   order?: number;
 };
 
-export type ExtendedPlannedExercise = PlannedExercise & {
+export type ExtendedWorkoutExercise = WorkoutExercise & {
   exercise?: Exercise;
 };
 
-export const plannedExercises: PlannedExercise[] = [
+export const workoutExercises: WorkoutExercise[] = [
   {
     id: "pe-1",
     workoutId: "w-1",

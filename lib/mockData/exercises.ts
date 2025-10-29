@@ -25,6 +25,7 @@ export const exercises: Exercise[] = [
     name: "Deadlift",
     description: "3 sets of 10 reps",
     videoUrl: "https://www.youtube.com/watch?v=0w-4y6-9-sI",
+    extraVideos: ["https://www.youtube.com/watch?v=cbKkB3POqaY"],
   },
   {
     id: "e-4",

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { InfoItem } from "@/components/common/info-item";
 import { PageHeader } from "@/components/common/page-header";
 import { StatusInfoItem } from "@/components/common/status-info-item";
-import { ExerciseList } from "@/components/exercise-list";
 import { ExerciseVideoList } from "@/components/exercise-video-list";
+import { WorkoutExerciseList } from "@/components/workout-exercise-list";
 import { CompleteSessionButton } from "@/components/workoutSession/complete-session-button";
 import { SingleSessionOptionsMenu } from "@/components/workoutSession/workout-session-opions-menu";
 import { exercises } from "@/lib/mockData/exercises";
@@ -70,11 +70,11 @@ export default async function SingleWorkoutSessionPage({
           plannedExercises &&
           plannedExercises.length > 0 &&
           (plannedExercises.length > 1 ? (
-            <ExerciseList exercises={plannedExercises} />
+            <WorkoutExerciseList exercises={plannedExercises} />
           ) : (
             plannedExercises[0].exercise && (
               <>
-                <ExerciseList exercises={plannedExercises} />
+                <WorkoutExerciseList exercises={plannedExercises} />
                 <ExerciseVideoList
                   exercise={plannedExercises[0].exercise}
                   headless
