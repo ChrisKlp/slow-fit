@@ -18,7 +18,7 @@ export function PlanCard({ plan, headless = false }: PlanCardProps) {
     <div className="card flex overflow-hidden" key={plan.id}>
       <Image
         alt={plan.name}
-        className="w-50 object-cover"
+        className="w-10 object-cover md:w-50"
         height={200}
         src={plan.coverImage}
         width={300}

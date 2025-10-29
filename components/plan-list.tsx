@@ -25,7 +25,7 @@ export function PlanList({ title, link, plans }: PlanListProps) {
           >
             <div className="mb-2 flex items-center gap-2">
               <p className="font-semibold">{plan.name}</p>
-              <Badge variant="outline">{`${getProgress(plan.completedSessions, plan.totalSessions)}%`}</Badge>
+              <Badge variant="success">{`${getProgress(plan.completedSessions, plan.totalSessions)}%`}</Badge>
             </div>
             <div className="flex items-center gap-2 text-xs">
               <span className="flex items-center gap-2">

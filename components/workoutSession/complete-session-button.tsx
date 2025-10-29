@@ -13,7 +13,7 @@ export function CompleteSessionButton({ sessionId }: { sessionId: string }) {
       variant="success"
     >
       <Flag className="h-4 w-4" />
-      Complete Session
+      <span className="hidden md:inline-block">Complete Session</span>
     </Button>
   );
 }

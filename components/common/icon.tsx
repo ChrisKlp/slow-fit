@@ -17,7 +17,7 @@ export function Icon({
   return (
     <div
       className={cn(
-        "grid size-10 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground transition-colors",
+        "grid size-7 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground transition-colors md:size-10",
         {
           "bg-blue-600/20 text-blue-400": variant === "primary",
           "bg-teal-600/20 text-teal-400": variant === "secondary",
@@ -32,7 +32,7 @@ export function Icon({
         className
       )}
     >
-      <IconComponent className="size-5" />
+      <IconComponent className="size-4 md:size-5" />
     </div>
   );
 }

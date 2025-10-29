@@ -25,8 +25,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className="grid grid-cols-3 items-start gap-6">
-      <div className="col-span-2 grid grid-cols-3 gap-4">
+    <div className="grid items-start gap-4 md:grid-cols-3 md:gap-6">
+      <div className="order-2 grid grid-cols-3 gap-4 md:order-1 md:col-span-2">
         <SmallStat
           content="20"
           description="To Go"
@@ -43,18 +43,22 @@ export default function HomePage() {
         <div className="col-span-3 grid gap-4">
           <Heatmap workouts={allWorkoutSessions} />
           <WorkoutSessionList
+            hiddenPlanForMobile={false}
+            hiddenStatusForMobile={true}
             link="history"
             title="Scheduled Workouts"
             workouts={allFutureSessions.slice(0, 5)}
           />
           <WorkoutSessionList
+            hiddenPlanForMobile={false}
+            hiddenStatusForMobile={true}
             link="history/#"
             title="History"
             workouts={allPastSessions.slice(0, 5)}
           />
         </div>
       </div>
-      <div className="col-span-1 grid gap-4">
+      <div className="order-1 grid gap-4 md:order-2 md:col-span-1">
         <PlanList
           link={routes.ACTIVE_PLANS}
           plans={activePlans}

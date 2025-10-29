@@ -6,6 +6,7 @@ import type {
 } from "@/lib/mockData/workout-sessions";
 import { workouts as workoutsList } from "@/lib/mockData/workouts";
 import { routes } from "@/lib/navigation-items";
+import { cn } from "@/lib/utils";
 import { CardHeader } from "./common/card-header";
 import { Badge } from "./ui/badge";
 
@@ -13,12 +14,16 @@ type WorkoutSessionListProps = {
   title: string;
   link?: string;
   workouts: WorkoutSession[];
+  hiddenStatusForMobile?: boolean;
+  hiddenPlanForMobile?: boolean;
 };
 
 export function WorkoutSessionList({
   title,
   link,
   workouts,
+  hiddenStatusForMobile = false,
+  hiddenPlanForMobile = true,
 }: WorkoutSessionListProps) {
   function getBadgeVariant(status: WorkoutSessionStatus) {
     switch (status) {
@@ -37,15 +42,19 @@ export function WorkoutSessionList({
     <div className="card overflow-hidden p-0">
       <CardHeader link={link} title={title} />
       <div className="grid items-center">
-        <div className="grid grid-cols-5 items-center gap-4 bg-muted px-6 py-3 text-muted-foreground text-sm">
+        <div className="grid grid-cols-4 items-center gap-4 bg-muted px-6 py-3 text-muted-foreground text-sm md:grid-cols-5">
           <span className="col-span-2">Name</span>
-          <span>Plan</span>
+          <span className={cn({ "hidden md:block": hiddenPlanForMobile })}>
+            Plan
+          </span>
           <span>Date</span>
-          <span>Status</span>
+          <span className={cn({ "hidden md:block": hiddenStatusForMobile })}>
+            Status
+          </span>
         </div>
         {workouts.map((workout) => (
           <Link
-            className="grid grid-cols-5 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70"
+            className="grid grid-cols-4 items-center gap-4 border-b p-3 px-6 text-sm transition-colors last:border-b-0 hover:bg-muted/70 md:grid-cols-5"
             href={`${routes.WORKOUT_SESSIONS}/${workout.id}`}
             key={workout.id}
           >
@@ -62,16 +71,18 @@ export function WorkoutSessionList({
               />
               <span>{workout.name}</span>
             </div>
-            <span>
+            <span className={cn({ "hidden md:block": hiddenPlanForMobile })}>
               <span>{workout.planName}</span>
             </span>
             <span className="text-muted-foreground">{workout.date}</span>
-            <span>
+            <span className={cn({ "hidden md:block": hiddenStatusForMobile })}>
               <Badge
                 className="text-xs"
                 variant={getBadgeVariant(workout.status)}
               >
-                {workout.status}
+                <span className="w-full max-w-12 truncate md:max-w-none">
+                  {workout.status}
+                </span>
               </Badge>
             </span>
           </Link>

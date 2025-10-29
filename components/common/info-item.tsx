@@ -25,9 +25,11 @@ export function InfoItem({
       <Icon icon={IconComponent} link={Boolean(link)} variant={variant} />
       <span className="grid transition-transform group-hover:translate-x-1">
         {label && (
-          <span className="text-muted-foreground text-sm">{label}</span>
+          <span className="text-muted-foreground text-xs md:text-sm">
+            {label}
+          </span>
         )}
-        <span className="capitalize">{value}</span>
+        <span className="text-sm capitalize md:text-base">{value}</span>
       </span>
     </>
   );

@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const smallStatVariants = cva(
-  "group flex items-center justify-between gap-4 overflow-hidden rounded-2xl p-6",
+  "group flex items-center justify-center gap-4 overflow-hidden rounded-2xl p-3 lg:justify-between lg:p-6",
   {
     variants: {
       variant: {
@@ -37,12 +37,14 @@ export function SmallStat({
 }: SmallStatProps) {
   return (
     <div className={cn(smallStatVariants({ variant, className }))}>
-      <div>
+      <div className="grid justify-items-center lg:justify-items-start">
         <span className="font-semibold text-3xl">{content}</span>
-        <p className="text-sm">{description}</p>
+        <p className="text-xs lg:text-sm">{description}</p>
       </div>
       <div
-        className={cn("icon-wrapper grid place-items-center rounded-full p-3")}
+        className={cn(
+          "icon-wrapper hidden place-items-center rounded-full p-3 lg:grid"
+        )}
       >
         <Icon className="size-7 text-blue-400" />
       </div>

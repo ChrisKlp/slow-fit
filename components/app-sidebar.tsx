@@ -47,6 +47,7 @@ export function AppSidebar() {
 
 function SidebarGroupComponent({ items }: { items: NavigationItem[] }) {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -65,7 +66,7 @@ function SidebarGroupComponent({ items }: { items: NavigationItem[] }) {
                   size="lg"
                   tooltip={item.title}
                 >
-                  <Link href={item.url}>
+                  <Link href={item.url} onClick={() => setOpenMobile(false)}>
                     <item.IconComponent />
                     <span>{item.title}</span>
                   </Link>
