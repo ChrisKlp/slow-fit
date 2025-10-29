@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Icon } from "./icon";
 
 type InfoItemProps = {
-  label: string;
+  label?: string;
   value: string | number;
   icon: LucideIcon;
   link?: string;
@@ -24,7 +24,9 @@ export function InfoItem({
     <>
       <Icon icon={IconComponent} link={Boolean(link)} variant={variant} />
       <span className="grid transition-transform group-hover:translate-x-1">
-        <span className="text-muted-foreground text-sm">{label}</span>
+        {label && (
+          <span className="text-muted-foreground text-sm">{label}</span>
+        )}
         <span className="capitalize">{value}</span>
       </span>
     </>
