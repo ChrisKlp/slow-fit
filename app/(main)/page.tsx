@@ -5,14 +5,25 @@ import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
 import { WorkoutSessionList } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
+import { workoutPlans } from "@/lib/mockData/workout-plans";
 import {
   allFutureSessions,
   allPastSessions,
   allWorkoutSessions,
+  type WorkoutSession,
 } from "@/lib/mockData/workout-sessions";
 import { routes } from "@/lib/navigation-items";
 
 export default function HomePage() {
+  const lastWorkoutSession = allPastSessions[0];
+  const nextWorkoutSession = allFutureSessions[0];
+
+  function getWorkoutPlanImageSrc(workout: WorkoutSession) {
+    const activePlan = activePlans.find((p) => p.id === workout.activePlanId);
+    return workoutPlans.find((p) => p.id === activePlan?.workoutPlanId)
+      ?.coverImage;
+  }
+
   return (
     <div className="grid grid-cols-3 items-start gap-6">
       <div className="col-span-2 grid grid-cols-3 gap-4">
@@ -50,21 +61,15 @@ export default function HomePage() {
           title="Active Plans"
         />
         <WorkoutCard
-          date="2025-03-01"
-          header="Next workout"
-          image="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1600"
-          link="workout/"
-          plan="StrongLifts"
-          title="Full body workout"
+          imageSrc={getWorkoutPlanImageSrc(nextWorkoutSession) ?? ""}
+          title="Next workout"
           variant="accent"
+          workout={nextWorkoutSession}
         />
         <WorkoutCard
-          date="2025-03-01"
-          header="Last workout"
-          image="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600"
-          link="workout/#"
-          plan="StrongLifts"
-          title="Upper body workout"
+          imageSrc={getWorkoutPlanImageSrc(lastWorkoutSession) ?? ""}
+          title="Last workout"
+          workout={lastWorkoutSession}
         />
       </div>
     </div>

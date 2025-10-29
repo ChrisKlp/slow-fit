@@ -383,9 +383,9 @@ export const allWorkoutSessions: WorkoutSession[] = sessions.map((session) => {
   };
 });
 
-export const allPastSessions: WorkoutSession[] = allWorkoutSessions.filter(
-  (session) => isPastDate(session.date)
-);
+export const allPastSessions: WorkoutSession[] = allWorkoutSessions
+  .filter((session) => isPastDate(session.date))
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 export const allFutureSessions: WorkoutSession[] = allWorkoutSessions.filter(
   (session) => !isPastDate(session.date)

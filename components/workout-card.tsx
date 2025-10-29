@@ -1,26 +1,22 @@
 import { Calendar } from "lucide-react";
 import Image from "next/image";
+import type { WorkoutSession } from "@/lib/mockData/workout-sessions";
+import { routes } from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
 import { CardHeader } from "./common/card-header";
 
 type WorkoutCardProps = {
-  header: string;
   title: string;
-  date: string;
-  plan: string;
-  image: string;
-  link?: string;
+  workout: WorkoutSession;
+  imageSrc: string;
   className?: string;
   variant?: "default" | "accent";
 };
 
 export function WorkoutCard({
-  header,
   title,
-  date,
-  plan,
-  image,
-  link,
+  workout,
+  imageSrc,
   className,
   variant = "default",
 }: WorkoutCardProps) {
@@ -32,13 +28,16 @@ export function WorkoutCard({
         className
       )}
     >
-      <CardHeader link={link} title={header} />
+      <CardHeader
+        link={`${routes.WORKOUT_SESSIONS}/${workout.id}`}
+        title={title}
+      />
       <div>
         <Image
-          alt={title}
+          alt={workout.name}
           className="h-40 object-cover"
           height={400}
-          src={image}
+          src={imageSrc}
           width={600}
         />
         <div className="grid gap-1 p-6">
@@ -48,11 +47,11 @@ export function WorkoutCard({
               variant === "accent" && "text-blue-300"
             )}
           >
-            {plan}
+            {workout.planName}
           </span>
-          <p className="font-semibold">{title}</p>
+          <p className="font-semibold">{workout.name}</p>
           <span className="flex items-center gap-2 text-sm">
-            <Calendar className="size-4 text-blue-400" /> {date}
+            <Calendar className="size-4 text-blue-400" /> {workout.date}
           </span>
         </div>
       </div>
