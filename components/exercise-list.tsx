@@ -1,7 +1,7 @@
 import type { Exercise } from "@/lib/mockData/exercises";
 import { CardHeader } from "./common/card-header";
 import { VideoButton } from "./common/video-button";
-import { SingleSessionOptionsMenu } from "./workoutSession/workout-session-opions-menu";
+import { ExerciseOptionsMenu } from "./exercises/exercise-options-menu";
 
 type WorkoutListProps = {
   title: string;
@@ -62,7 +62,7 @@ export function ExerciseList({
                 />
               ))}
             </div>
-            <SingleSessionOptionsMenu sessionId={exercise.id} />
+            <ExerciseOptionsMenu exerciseId={exercise.id} />
           </div>
         ))}
       </div>
