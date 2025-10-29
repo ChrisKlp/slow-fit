@@ -23,6 +23,7 @@ import type {
   WorkoutSession,
   WorkoutSessionStatus,
 } from "@/lib/mockData/workout-sessions";
+import { routes } from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
 import { CardHeader } from "./common/card-header";
 
@@ -89,10 +90,10 @@ export function Heatmap({ workouts }: { workouts: WorkoutSession[] }) {
   return (
     <TooltipProvider>
       <div className="card overflow-hidden">
-        <CardHeader link={"calendar/#"} title="Heatmap" />
+        <CardHeader link={routes.WORKOUT_SESSIONS} title="Heatmap" />
         <div className="flex w-full justify-center p-6">
           <div
-            className="flex w-full items-end overflow-x-auto pb-4"
+            className="flex w-fit items-end overflow-x-auto pb-4"
             ref={scrollRef}
           >
             {/* Day labels */}

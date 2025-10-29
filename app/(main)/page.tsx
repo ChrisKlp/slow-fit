@@ -45,14 +45,12 @@ export default function HomePage() {
           <WorkoutSessionList
             hiddenPlanForMobile={false}
             hiddenStatusForMobile={true}
-            link="history"
             title="Scheduled Workouts"
             workouts={allFutureSessions.slice(0, 5)}
           />
           <WorkoutSessionList
             hiddenPlanForMobile={false}
             hiddenStatusForMobile={true}
-            link="history/#"
             title="History"
             workouts={allPastSessions.slice(0, 5)}
           />
