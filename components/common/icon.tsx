@@ -5,12 +5,14 @@ type IconProps = {
   icon: LucideIcon;
   link?: boolean;
   variant?: "default" | "primary" | "secondary" | "destructive";
+  className?: string;
 };
 
 export function Icon({
   icon: IconComponent,
   link,
   variant = "default",
+  className,
 }: IconProps) {
   return (
     <div
@@ -26,7 +28,8 @@ export function Icon({
           "group-hover:bg-blue-600/40": variant === "primary",
           "group-hover:bg-teal-600/40": variant === "secondary",
           "group-hover:bg-red-600/40": variant === "destructive",
-        }
+        },
+        className
       )}
     >
       <IconComponent className="size-5" />

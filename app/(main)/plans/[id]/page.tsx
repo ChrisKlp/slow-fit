@@ -41,7 +41,11 @@ export default async function SinglePlanPage({ params }: SinglePlanPageProps) {
       <div className="space-y-6">
         <PlanCard headless plan={plan} />
         <WorkoutList title="Workout list" workouts={workoutList} />
-        <WorkoutList title="Schedule list" workouts={scheduledWorkouts} />
+        <WorkoutList
+          numbered
+          title="Schedule list"
+          workouts={scheduledWorkouts}
+        />
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import type { WorkoutPlan } from "@/lib/mockData/workout-plans";
 import { routes } from "@/lib/navigation-items";
 import { cn, getWeeksNumber } from "@/lib/utils";
 import { PlanOptionsMenu } from "./plan-options-menu";
+import { WeekPattern } from "./week-pattern";
 
 type PlanCardProps = {
   plan: WorkoutPlan;
@@ -50,6 +51,9 @@ export function PlanCard({ plan, headless = false }: PlanCardProps) {
             variant="primary"
           />
         </div>
+        {headless && (
+          <WeekPattern className="mt-6" pattern={plan.weekPattern} />
+        )}
       </div>
     </div>
   );
