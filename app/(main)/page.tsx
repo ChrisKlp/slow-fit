@@ -1,9 +1,9 @@
 import { Hourglass, SquareCheckBig, TrendingUp } from "lucide-react";
-import { Heatmap } from "@/components/heatmap";
+import { HeatmapCard } from "@/components/heatmap-card";
 import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
 import { WorkoutCard } from "@/components/workout-card";
-import { WorkoutSessionList } from "@/components/workout-session-list";
+import { WorkoutSessionListCard } from "@/components/workout-session-list";
 import { activePlans } from "@/lib/mockData/active-plans";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 import {
@@ -41,14 +41,14 @@ export default function HomePage() {
           variant="teal"
         />
         <div className="col-span-3 grid gap-4">
-          <Heatmap workouts={allWorkoutSessions} />
-          <WorkoutSessionList
+          <HeatmapCard isPreview workouts={allWorkoutSessions} />
+          <WorkoutSessionListCard
             hiddenPlanForMobile={false}
             hiddenStatusForMobile={true}
             title="Scheduled Workouts"
             workouts={allFutureSessions.slice(0, 5)}
           />
-          <WorkoutSessionList
+          <WorkoutSessionListCard
             hiddenPlanForMobile={false}
             hiddenStatusForMobile={true}
             title="History"
