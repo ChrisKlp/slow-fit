@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite"],
+  "extends": ["ultracite/core", "ultracite/next"],
   "files": {
     "includes": ["!components/ui"]
   },
@@ -17,7 +17,8 @@
         "noMagicNumbers": "off"
       },
       "nursery": {
-        "noShadow": "off"
+        "noShadow": "off",
+        "noIncrementDecrement": "off"
       }
     }
   }
