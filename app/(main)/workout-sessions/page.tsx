@@ -13,7 +13,7 @@ export default function WorkoutSessionsPage() {
   return (
     <>
       <PageHeader breadcrumbs={[{ title: pageTitle }]} title={pageTitle} />
-      <div className="space-y-6">
+      <div className="grid space-y-6">
         <Heatmap workouts={sortedWorkouts} />
         <WorkoutSessionList title="Sessions" workouts={sortedWorkouts} />
       </div>
