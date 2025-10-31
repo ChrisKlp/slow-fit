@@ -11,11 +11,18 @@ import { WeekPattern } from "./week-pattern";
 type PlanCardProps = {
   plan: WorkoutPlan;
   headless?: boolean;
+  isPreview?: boolean;
+  displayWeekPattern?: boolean;
 };
 
-export function PlanCard({ plan, headless = false }: PlanCardProps) {
+export function PlanCard({
+  plan,
+  headless = false,
+  isPreview = false,
+  displayWeekPattern = false,
+}: PlanCardProps) {
   return (
-    <div className="card flex overflow-hidden" key={plan.id}>
+    <div className="card flex w-full overflow-hidden" key={plan.id}>
       <Image
         alt={plan.name}
         className="w-10 object-cover md:w-50"
@@ -26,10 +33,16 @@ export function PlanCard({ plan, headless = false }: PlanCardProps) {
       <div className={cn("w-full p-6", headless && "grid")}>
         {!headless && (
           <div className="mb-6 flex items-center justify-between">
-            <Link href={`${routes.PLANS}/${plan.id}`}>
+            {isPreview ? (
               <h2 className="font-semibold text-xl">{plan.name}</h2>
-            </Link>
-            <PlanOptionsMenu planId={plan.id} />
+            ) : (
+              <>
+                <Link href={`${routes.PLANS}/${plan.id}`}>
+                  <h2 className="font-semibold text-xl">{plan.name}</h2>
+                </Link>
+                <PlanOptionsMenu planId={plan.id} />
+              </>
+            )}
           </div>
         )}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -51,7 +64,7 @@ export function PlanCard({ plan, headless = false }: PlanCardProps) {
             variant="primary"
           />
         </div>
-        {headless && (
+        {displayWeekPattern && (
           <WeekPattern className="mt-6" pattern={plan.weekPattern} />
         )}
       </div>

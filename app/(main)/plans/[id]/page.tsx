@@ -39,7 +39,7 @@ export default async function SinglePlanPage({ params }: SinglePlanPageProps) {
         <SinglePlanOptionsMenu planId={plan.id} />
       </PageHeader>
       <div className="space-y-6">
-        <PlanCard headless plan={plan} />
+        <PlanCard displayWeekPattern headless plan={plan} />
         <WorkoutList title="Workout list" workouts={workoutList} />
         <WorkoutList
           numbered
