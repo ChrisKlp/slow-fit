@@ -63,14 +63,16 @@ export default function StartNewPlanPage() {
                   >
                     <SelectTrigger
                       aria-invalid={fieldState.invalid}
-                      className="cursor-pointer"
+                      className="w-full cursor-pointer truncate"
                     >
                       <SelectValue placeholder="Select workout plan" />
                     </SelectTrigger>
                     <SelectContent>
                       {workoutPlans.map((plan) => (
                         <SelectItem key={plan.id} value={plan.id}>
-                          {plan.name} - {plan.totalSessions} workout sessions
+                          <span className="max-w-[60dvw] truncate">
+                            {plan.name} - {plan.totalSessions} workout sessions
+                          </span>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -99,7 +101,9 @@ export default function StartNewPlanPage() {
                 </div>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button className="w-full md:w-40" type="submit">
+              Submit
+            </Button>
           </form>
         </Form>
       </div>
