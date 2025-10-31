@@ -13,7 +13,7 @@ export default function ActivePlansPage() {
       >
         <Button variant="outline">
           <Plus />
-          Add Plan
+          Start a New Plan
         </Button>
       </PageHeader>
       <div className="space-y-6">

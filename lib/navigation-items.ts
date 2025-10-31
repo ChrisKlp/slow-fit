@@ -1,5 +1,5 @@
 import {
-  Activity,
+  Clipboard,
   Home,
   List,
   LogIn,
@@ -32,7 +32,7 @@ export const mainNavigationItems: NavigationItem[] = [
   {
     title: "Active Plans",
     url: routes.ACTIVE_PLANS,
-    IconComponent: Activity,
+    IconComponent: Clipboard,
   },
   {
     title: "Sessions",

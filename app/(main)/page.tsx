@@ -1,4 +1,5 @@
 import { Hourglass, SquareCheckBig, TrendingUp } from "lucide-react";
+import { EmptyActivePlans } from "@/components/empty-active-plans";
 import { HeatmapCard } from "@/components/heatmap-card";
 import { PlanList } from "@/components/plan-list";
 import { SmallStat } from "@/components/small-stat";
@@ -22,6 +23,14 @@ export default function HomePage() {
     const activePlan = activePlans.find((p) => p.id === workout.activePlanId);
     return workoutPlans.find((p) => p.id === activePlan?.workoutPlanId)
       ?.coverImage;
+  }
+
+  if (activePlans.length > 0) {
+    return (
+      <div className="card p-6">
+        <EmptyActivePlans />
+      </div>
+    );
   }
 
   return (
