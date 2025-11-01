@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
+import { generateWorkoutSessions } from "@/lib/utils";
 
 const formSchema = z.object({
   plan: z.string().nonempty("Please select a plan."),
@@ -38,7 +39,10 @@ export default function StartNewPlanPage() {
   const plan = planId ? workoutPlans.find((p) => p.id === planId) : undefined;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    if (plan) {
+      const sessions = generateWorkoutSessions(values.date, plan, plan?.id);
+      console.log(sessions);
+    }
   }
 
   return (

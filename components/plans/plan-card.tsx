@@ -60,12 +60,12 @@ export function PlanCard({
           <InfoItem
             icon={Calendar}
             label="Weeks"
-            value={getWeeksNumber(plan.totalSessions, plan.weekPattern)}
+            value={getWeeksNumber(plan.totalSessions, plan.daySequence)}
             variant="primary"
           />
         </div>
         {displayWeekPattern && (
-          <WeekPattern className="mt-6" pattern={plan.weekPattern} />
+          <WeekPattern className="mt-6" pattern={plan.daySequence} />
         )}
       </div>
     </div>
