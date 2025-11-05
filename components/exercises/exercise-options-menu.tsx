@@ -2,7 +2,9 @@
 
 import { Activity, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { logger } from "@/lib/logger";
 import { exercises } from "@/lib/mockData/exercises";
+import { DeleteConfirmationAlert } from "../common/delete-confirmation-alert";
 import { DrawerDialog } from "../common/drawer-dialog";
 import { OptionsMenu } from "../common/options-menu";
 import {
@@ -54,13 +56,13 @@ export function ExerciseOptionsMenu({ exerciseId }: ExerciseOptionsMenuProps) {
           exercise={exercises.find((exercise) => exercise.id === exerciseId)}
         />
       </DrawerDialog>
-      <DrawerDialog
-        open={isDeleteDialogOpen}
-        setOpen={setIsDeleteDialogOpen}
-        title="Delete Exercise"
-      >
-        <div>Delete exercise</div>
-      </DrawerDialog>
+      <DeleteConfirmationAlert
+        isOpen={isDeleteDialogOpen}
+        onAction={() => {
+          logger.log(`Deleted exercise ${exerciseId}`);
+        }}
+        setIsOpen={setIsDeleteDialogOpen}
+      />
     </>
   );
 }

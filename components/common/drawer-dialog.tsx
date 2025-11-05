@@ -26,6 +26,7 @@ type DrawerDialogProps = {
   trigger?: React.ReactNode;
   setOpen: (open: boolean) => void;
   open: boolean;
+  footer?: React.ReactNode;
 } & PropsWithChildren;
 
 export function DrawerDialog({
