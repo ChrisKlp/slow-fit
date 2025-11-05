@@ -12,6 +12,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -49,17 +50,29 @@ export function ExerciseFormDialog({
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     logger.info(JSON.stringify(values, null, 2));
+    onOpenChange?.(false);
+  }
+
+  function onCancel() {
+    setTimeout(() => {
+      form.clearErrors();
+      form.reset();
+    }, 100);
   }
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogContent className={cn("grid items-start gap-6", className)}>
+        <DialogContent>
+          <form
+            className={cn("grid items-start gap-6", className)}
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <DialogHeader>
               <DialogTitle>
                 {exercise ? "Edit exercise" : "New exercise"}
               </DialogTitle>
+              <DialogDescription className="hidden" />
             </DialogHeader>
             <FormField
               control={form.control}
@@ -112,12 +125,20 @@ export function ExerciseFormDialog({
 
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button
+                  onClick={() => {
+                    onCancel();
+                  }}
+                  type="button"
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
               </DialogClose>
               <Button type="submit">Save changes</Button>
             </DialogFooter>
-          </DialogContent>
-        </form>
+          </form>
+        </DialogContent>
       </Form>
     </Dialog>
   );

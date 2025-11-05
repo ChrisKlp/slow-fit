@@ -4,7 +4,7 @@ import { PlanCard } from "@/components/plans/plan-card";
 import { Button } from "@/components/ui/button";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 
-export default function PlasPage() {
+export default function PlansPage() {
   return (
     <>
       <PageHeader
