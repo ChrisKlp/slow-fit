@@ -5,14 +5,13 @@ import { useState } from "react";
 import { logger } from "@/lib/logger";
 import { exercises } from "@/lib/mockData/exercises";
 import { DeleteConfirmationAlert } from "../common/delete-confirmation-alert";
-import { DrawerDialog } from "../common/drawer-dialog";
 import { OptionsMenu } from "../common/options-menu";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { ExerciseForm } from "./exercise-form";
+import { ExerciseFormDialog } from "./exercise-form-dialog";
 
 type ExerciseOptionsMenuProps = {
   exerciseId: string;
@@ -47,15 +46,11 @@ export function ExerciseOptionsMenu({ exerciseId }: ExerciseOptionsMenuProps) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </OptionsMenu>
-      <DrawerDialog
+      <ExerciseFormDialog
+        exercise={exercises.find((exercise) => exercise.id === exerciseId)}
+        onOpenChange={setIsEditDialogOpen}
         open={isEditDialogOpen}
-        setOpen={setIsEditDialogOpen}
-        title="Edit Exercise"
-      >
-        <ExerciseForm
-          exercise={exercises.find((exercise) => exercise.id === exerciseId)}
-        />
-      </DrawerDialog>
+      />
       <DeleteConfirmationAlert
         isOpen={isDeleteDialogOpen}
         onAction={() => {
