@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { logger } from "@/lib/logger";
-import type { Exercise } from "@/lib/mockData/exercises";
+import { type Exercise, exerciseSchema } from "@/lib/mockData/exercises";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -16,15 +18,31 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+} from "../../ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "../../ui/form";
+import ExtraVideosFieldArray from "./extra-videos-field-array";
 
-const formSchema = z.object({
-  name: z.string().nonempty("Please enter an exercise name."),
-  description: z.string().optional(),
-  video: z.string().optional(),
-  extraVideo: z.string().optional(),
-});
+const formSchema = exerciseSchema
+  .omit({
+    id: true,
+  })
+  .extend({
+    name: z.string().min(1, "Please enter an exercise name."),
+    extraVideos: z.array(
+      z.object({
+        url: z.string(),
+      })
+    ),
+  })
+  .required({
+    type: true,
+  });
 
 type ExerciseFormDialogProps = {
   exercise?: Exercise;
@@ -32,6 +50,7 @@ type ExerciseFormDialogProps = {
   onOpenChange?: (open: boolean) => void;
   className?: string;
 };
+
 export function ExerciseFormDialog({
   exercise,
   open,
@@ -43,25 +62,30 @@ export function ExerciseFormDialog({
     defaultValues: {
       name: exercise?.name ?? "",
       description: exercise?.description ?? "",
-      video: exercise?.videoUrl ?? "",
-      extraVideo: exercise?.extraVideos?.[0] ?? "",
+      type: exercise?.type,
+      videoUrl: exercise?.videoUrl ?? "",
+      extraVideos:
+        exercise?.extraVideos?.map((video) => ({
+          url: video,
+        })) ?? [],
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     logger.info(JSON.stringify(values, null, 2));
-    onOpenChange?.(false);
+    onCancel();
   }
 
   function onCancel() {
+    onOpenChange?.(false);
     setTimeout(() => {
       form.clearErrors();
       form.reset();
-    }, 100);
+    }, 300);
   }
 
   return (
-    <Dialog onOpenChange={onOpenChange} open={open}>
+    <Dialog onOpenChange={onCancel} open={open}>
       <Form {...form}>
         <DialogContent>
           <form
@@ -100,7 +124,33 @@ export function ExerciseFormDialog({
             />
             <FormField
               control={form.control}
-              name="video"
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Exercise Type</FormLabel>
+
+                  <RadioGroup
+                    className="flex"
+                    defaultValue="reps"
+                    name={field.name}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem id="reps" value="reps" />
+                      <Label htmlFor="reps">Repetitions</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem id="time" value="time" />
+                      <Label htmlFor="time">Time</Label>
+                    </div>
+                  </RadioGroup>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="videoUrl"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Video</FormLabel>
@@ -110,18 +160,8 @@ export function ExerciseFormDialog({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="extraVideo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Extra Video</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Extra video URL" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+
+            <ExtraVideosFieldArray />
 
             <DialogFooter>
               <DialogClose asChild>

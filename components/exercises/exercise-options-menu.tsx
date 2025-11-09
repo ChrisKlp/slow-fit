@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { ExerciseFormDialog } from "./exercise-form-dialog";
+import { ExerciseFormDialog } from "./form/exercise-form-dialog";
 
 type ExerciseOptionsMenuProps = {
   exerciseId: string;

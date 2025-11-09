@@ -1,7 +1,7 @@
 import type { Exercise } from "@/lib/mockData/exercises";
-import { CardHeader } from "./common/card-header";
-import { VideoButton } from "./common/video-button";
-import { ExerciseOptionsMenu } from "./exercises/exercise-options-menu";
+import { CardHeader } from "../common/card-header";
+import { VideoButton } from "../common/video-button";
+import { ExerciseOptionsMenu } from "./exercise-options-menu";
 
 type WorkoutListProps = {
   title: string;

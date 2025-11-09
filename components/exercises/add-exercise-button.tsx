@@ -3,7 +3,7 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { ExerciseFormDialog } from "./exercise-form-dialog";
+import { ExerciseFormDialog } from "./form/exercise-form-dialog";
 
 export function AddExerciseButton() {
   const [open, setOpen] = useState(false);
