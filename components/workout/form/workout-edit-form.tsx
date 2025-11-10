@@ -2,6 +2,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { logger } from "@/lib/logger";
@@ -26,6 +27,7 @@ import { ExercisesFieldArray } from "./exercises-field-array";
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   coverImage: z.url("Must be a valid URL"),
+  tags: z.string().optional(),
   exercises: z
     .array(workoutExerciseSchema)
     .min(1, "At least one exercise is required"),
@@ -42,6 +44,7 @@ export function WorkoutEditForm({
   exercises,
   className,
 }: WorkoutEditFormProps) {
+  const router = useRouter();
   const filtered = exercises?.map(({ exercise, ...rest }) => rest);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,6 +52,7 @@ export function WorkoutEditForm({
     defaultValues: {
       name: workout?.name ?? "",
       coverImage: workout?.coverImage ?? "",
+      tags: workout?.tags?.join(",") ?? "",
       exercises: filtered ?? [],
     },
   });
@@ -75,6 +79,10 @@ export function WorkoutEditForm({
 
     logger.info("onSubmit");
     logger.info(JSON.stringify(result, null, 2));
+  }
+
+  function onCancel() {
+    router.back();
   }
 
   return (
@@ -111,6 +119,18 @@ export function WorkoutEditForm({
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="tags"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tags</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
           <ExercisesFieldArray
             allExercises={allExercises}
@@ -118,8 +138,18 @@ export function WorkoutEditForm({
           />
 
           <div className="flex justify-end gap-3">
-            <Button variant="outline">Cancel</Button>
-            <Button variant="destructive">Delete</Button>
+            <Button onClick={onCancel} type="button" variant="outline">
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                logger.info(`Delete workout with id ${workout?.id}`);
+              }}
+              type="button"
+              variant="destructive"
+            >
+              Delete
+            </Button>
             <Button type="submit">
               <span className="flex gap-1">
                 Save<span className="hidden md:inline-flex">changes</span>
