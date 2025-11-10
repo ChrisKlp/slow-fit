@@ -21,7 +21,7 @@ export default async function SingleWorkoutPage({
     notFound();
   }
 
-  const plannedExercises = workout?.exercises.map((e) => ({
+  const workoutExercises = workout?.exercises.map((e) => ({
     ...e,
     exercise: exercises.find((ex) => ex.id === e.exerciseId),
   }));
@@ -39,16 +39,16 @@ export default async function SingleWorkoutPage({
       </PageHeader>
       <div className="space-y-6">
         {workout &&
-          plannedExercises &&
-          plannedExercises.length > 0 &&
-          (plannedExercises.length > 1 ? (
-            <WorkoutExerciseList exercises={plannedExercises} />
+          workoutExercises &&
+          workoutExercises.length > 0 &&
+          (workoutExercises.length > 1 ? (
+            <WorkoutExerciseList exercises={workoutExercises} />
           ) : (
-            plannedExercises[0].exercise && (
+            workoutExercises[0].exercise && (
               <>
-                <WorkoutExerciseList exercises={plannedExercises} />
+                <WorkoutExerciseList exercises={workoutExercises} />
                 <ExerciseVideoList
-                  exercise={plannedExercises[0].exercise}
+                  exercise={workoutExercises[0].exercise}
                   headless
                 />
               </>

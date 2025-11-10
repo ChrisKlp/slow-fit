@@ -4,8 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Button } from "@/components/ui/button";
+import {
+  Field,
+  FieldContent,
+  FieldLabel,
+  FieldTitle,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { logger } from "@/lib/logger";
 import { type Exercise, exerciseSchema } from "@/lib/mockData/exercises";
@@ -136,18 +141,24 @@ export function ExerciseFormDialog({
                     onValueChange={field.onChange}
                     value={field.value}
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem id="reps" value="reps" />
-                      <Label htmlFor="reps">Repetitions</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem id="time" value="time" />
-                      <Label htmlFor="time">Time</Label>
-                    </div>
+                    {[
+                      { id: "reps", title: "Repetitions" },
+                      { id: "time", title: "Time" },
+                    ].map((plan) => (
+                      <FieldLabel htmlFor={plan.id} key={plan.id}>
+                        <Field className="p-2! px-3!" orientation="horizontal">
+                          <FieldContent>
+                            <FieldTitle>{plan.title}</FieldTitle>
+                          </FieldContent>
+                          <RadioGroupItem id={plan.id} value={plan.id} />
+                        </Field>
+                      </FieldLabel>
+                    ))}
                   </RadioGroup>
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="videoUrl"
