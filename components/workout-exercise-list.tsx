@@ -38,7 +38,11 @@ export function WorkoutExerciseList({
                   <InfoItem icon={Repeat2} label="Reps" value={exercise.reps} />
                 )}
                 {exercise.time && (
-                  <InfoItem icon={Timer} label="Time" value={exercise.time} />
+                  <InfoItem
+                    icon={Timer}
+                    label="Time"
+                    value={`${exercise.time}s`}
+                  />
                 )}
               </div>
               <div className="order-4">

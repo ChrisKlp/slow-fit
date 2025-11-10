@@ -44,7 +44,7 @@ export function ExercisesFieldArray({
         const isTimeBasedExercise = selectedExercise?.type === "time";
 
         return (
-          <div className="flex gap-4" key={index}>
+          <div className="flex gap-2 lg:gap-4" key={index}>
             <div className="card w-full space-y-4 p-4">
               <FormField
                 control={control}
@@ -188,6 +188,7 @@ export function ExercisesFieldArray({
               />
             </div>
             <Button
+              className="size-7 lg:size-9"
               onClick={() => remove(index)}
               size="icon"
               type="button"
