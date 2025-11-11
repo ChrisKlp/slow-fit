@@ -18,7 +18,9 @@ export const routes = {
   ACTIVE_PLANS: "/active-plans",
   WORKOUT_SESSIONS: "/workout-sessions",
   PLANS: "/plans",
+  PLANS_CREATE: "/plans/create",
   WORKOUTS: "/workouts",
+  WORKOUTS_CREATE: "/workouts/create",
   EXERCISES: "/exercises",
   LOGIN: "/login",
 } as const;

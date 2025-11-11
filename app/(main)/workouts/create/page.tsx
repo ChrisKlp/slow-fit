@@ -8,7 +8,7 @@ export default function CreateNewWorkoutPage() {
       <PageHeader
         breadcrumbs={[
           { title: "Available Workouts", href: routes.WORKOUTS },
-          { title: "New" },
+          { title: "Create" },
         ]}
         title="Create new workout"
       />

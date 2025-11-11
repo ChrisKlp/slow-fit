@@ -1,8 +1,10 @@
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { PageHeader } from "@/components/common/page-header";
 import { PlanCard } from "@/components/plans/plan-card";
 import { Button } from "@/components/ui/button";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
+import { routes } from "@/lib/navigation-items";
 
 export default function PlansPage() {
   return (
@@ -11,9 +13,11 @@ export default function PlansPage() {
         breadcrumbs={[{ title: "Available Workout Plans" }]}
         title="Available Workout Plans"
       >
-        <Button variant="outline">
-          <Plus />
-          Add Plan
+        <Button asChild variant="outline">
+          <Link href={`${routes.PLANS_CREATE}`}>
+            <Plus />
+            Add Plan
+          </Link>
         </Button>
       </PageHeader>
       <div className="space-y-6">

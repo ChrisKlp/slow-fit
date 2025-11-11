@@ -13,7 +13,7 @@ export default function WorkoutsPage() {
     <>
       <PageHeader breadcrumbs={[{ title: pageTitle }]} title={pageTitle}>
         <Button asChild variant="outline">
-          <Link href={`${routes.WORKOUTS}/new`}>
+          <Link href={`${routes.WORKOUTS_CREATE}`}>
             <Plus />
             Add Workout
           </Link>
