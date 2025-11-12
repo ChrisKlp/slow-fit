@@ -106,8 +106,8 @@ export default function StartNewPlanPage() {
                 </div>
               )}
             />
-            <Button className="w-full md:w-40" type="submit">
-              Submit
+            <Button className="w-full self-end md:w-40" type="submit">
+              Start Plan
             </Button>
           </form>
         </Form>

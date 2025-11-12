@@ -16,6 +16,7 @@ export type NavigationItem = {
 export const routes = {
   ROOT: "/",
   ACTIVE_PLANS: "/active-plans",
+  ACTIVE_PLANS_CREATE: "/active-plans/start-new-plan",
   WORKOUT_SESSIONS: "/workout-sessions",
   PLANS: "/plans",
   PLANS_CREATE: "/plans/create",

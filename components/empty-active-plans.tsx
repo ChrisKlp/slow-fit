@@ -27,7 +27,7 @@ export function EmptyActivePlans() {
       <EmptyContent>
         <div className="flex gap-2">
           <Button asChild className="w-60">
-            <Link href={`${routes.ACTIVE_PLANS}/start-new-plan`}>
+            <Link href={routes.ACTIVE_PLANS_CREATE}>
               <span>Get Started</span>
             </Link>
           </Button>
