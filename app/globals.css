@@ -126,6 +126,6 @@
   }
 
   .card {
-    @apply rounded-lg border bg-card;
+    @apply rounded-lg border bg-card overflow-hidden;
   }
 }

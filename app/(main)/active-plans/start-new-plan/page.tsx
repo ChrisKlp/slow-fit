@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { logger } from "@/lib/logger";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 import { generateWorkoutSessions } from "@/lib/utils";
 
@@ -41,7 +42,7 @@ export default function StartNewPlanPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (plan) {
       const sessions = generateWorkoutSessions(values.date, plan, plan?.id);
-      console.log(sessions);
+      logger.log(JSON.stringify(sessions, null, 2));
     }
   }
 

@@ -1,16 +1,20 @@
-import type { Workout } from "./workouts";
+import z from "zod";
 
-export type ActivityType = "W" | "R";
+const activityTypeSchema = z.enum(["W", "R"]);
 
-export type WorkoutPlan = {
-  id: string;
-  name: string;
-  coverImage: string;
-  totalSessions: number;
-  daySequence: ActivityType[];
-  workouts: Workout["id"][];
-  schedule: Workout["id"][];
-};
+export type ActivityType = z.infer<typeof activityTypeSchema>;
+
+export const workoutPlanSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  coverImage: z.url().optional(),
+  totalSessions: z.number().optional(),
+  daySequence: z.array(activityTypeSchema).length(7),
+  workouts: z.array(z.string()).optional(),
+  schedule: z.array(z.string()),
+});
+
+export type WorkoutPlan = z.infer<typeof workoutPlanSchema>;
 
 export const workoutPlans: WorkoutPlan[] = [
   {

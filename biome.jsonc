@@ -8,7 +8,8 @@
     "rules": {
       "suspicious": {
         "noUnknownAtRules": "off",
-        "noConsole": "warn"
+        "noConsole": "warn",
+        "noArrayIndexKey": "off"
       },
       "performance": {
         "noNamespaceImport": "off"

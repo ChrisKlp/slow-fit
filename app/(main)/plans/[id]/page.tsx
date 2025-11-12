@@ -20,7 +20,7 @@ export default async function SinglePlanPage({ params }: SinglePlanPageProps) {
   }
 
   const workoutList = plan.workouts
-    .map((planWorkout) => workouts.find((w) => w.id === planWorkout))
+    ?.map((planWorkout) => workouts.find((w) => w.id === planWorkout))
     .filter((w) => w !== undefined);
 
   const scheduledWorkouts = plan.schedule
@@ -40,7 +40,7 @@ export default async function SinglePlanPage({ params }: SinglePlanPageProps) {
       </PageHeader>
       <div className="space-y-6">
         <PlanCard displayWeekPattern headless plan={plan} />
-        <WorkoutList title="Workout list" workouts={workoutList} />
+        <WorkoutList title="Workout list" workouts={workoutList ?? []} />
         <WorkoutList title="Schedule list" workouts={scheduledWorkouts} />
       </div>
     </>

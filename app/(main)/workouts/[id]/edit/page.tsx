@@ -5,13 +5,13 @@ import { exercises } from "@/lib/mockData/exercises";
 import { workouts } from "@/lib/mockData/workouts";
 import { routes } from "@/lib/navigation-items";
 
-type SingleWorkoutPageProps = {
+type EditWorkoutPageProps = {
   params: Promise<{ id: string }>;
 };
 
 export default async function EditWorkoutPage({
   params,
-}: SingleWorkoutPageProps) {
+}: EditWorkoutPageProps) {
   const { id } = await params;
   const workout = workouts.find((p) => p.id === id);
 

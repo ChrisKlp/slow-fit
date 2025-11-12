@@ -1,10 +1,10 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <> */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { EditFormButtonBar } from "@/components/common/edit-form-button-bar";
 import { logger } from "@/lib/logger";
 import { exercises as allExercises } from "@/lib/mockData/exercises";
 import {
@@ -13,7 +13,6 @@ import {
 } from "@/lib/mockData/workout-exercises";
 import type { Workout } from "@/lib/mockData/workouts";
 import { cn } from "@/lib/utils";
-import { Button } from "../../ui/button";
 import {
   Form,
   FormControl,
@@ -85,11 +84,14 @@ export function WorkoutEditForm({
     router.back();
   }
 
+  const formId = "workout-edit-form";
+
   return (
     <div className="card p-6">
       <Form {...form}>
         <form
           className={cn("grid items-start gap-6", className)}
+          id={formId}
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -137,25 +139,13 @@ export function WorkoutEditForm({
             workoutId={workout?.id}
           />
 
-          <div className="flex justify-end gap-3">
-            <Button onClick={onCancel} type="button" variant="outline">
-              Cancel
-            </Button>
-            <Button
-              onClick={() => {
-                logger.info(`Delete workout with id ${workout?.id}`);
-              }}
-              type="button"
-              variant="destructive"
-            >
-              Delete
-            </Button>
-            <Button type="submit">
-              <span className="flex gap-1">
-                Save<span className="hidden md:inline-flex">changes</span>
-              </span>
-            </Button>
-          </div>
+          <EditFormButtonBar
+            formId={formId}
+            onCancel={onCancel}
+            onDelete={() => {
+              logger.info(`Delete workout with id ${workout?.id}`);
+            }}
+          />
         </form>
       </Form>
     </div>
