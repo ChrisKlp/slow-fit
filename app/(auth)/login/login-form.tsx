@@ -21,6 +21,7 @@ export function LoginForm({
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
           <Input
+            autoComplete="email"
             id="email"
             name="email"
             placeholder="m@example.com"
@@ -30,10 +31,22 @@ export function LoginForm({
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" name="password" required type="password" />
+          <Input
+            autoComplete="current-password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+            type="password"
+          />
         </div>
-        <SubmitButton className="w-full" formAction={signIn} type="submit">
-          Login
+        <SubmitButton
+          className="w-full"
+          formAction={signIn}
+          pendingText="Signing In..."
+          type="submit"
+        >
+          Sign In
         </SubmitButton>
       </div>
     </form>
