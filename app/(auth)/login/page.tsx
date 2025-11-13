@@ -1,19 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { Logo } from "@/components/logo";
 import { LoginForm } from "./login-form";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const router = useRouter();
-
-  function handleSubmit(formData: FormData) {
-    setEmail(formData.get("email") as string);
-    router.push("/");
-  }
   return (
     <main className="grid min-h-svh bg-background lg:grid-cols-5">
       <div className="col-span-2 flex flex-col gap-4 p-6 md:p-10">
@@ -22,7 +11,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md rounded-xl border bg-card p-8 sm:p-12">
-            <LoginForm action={handleSubmit} defaultEmail={email} />
+            <LoginForm />
           </div>
         </div>
       </div>

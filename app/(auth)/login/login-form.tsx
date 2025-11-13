@@ -1,15 +1,14 @@
 import type React from "react";
-
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { signIn } from "./actions";
+import { SubmitButton } from "./submit-button";
 
 export function LoginForm({
   className,
-  defaultEmail,
   ...props
-}: React.ComponentPropsWithoutRef<"form"> & { defaultEmail?: string }) {
+}: React.ComponentProps<"form">) {
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -22,7 +21,6 @@ export function LoginForm({
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
           <Input
-            defaultValue={defaultEmail}
             id="email"
             name="email"
             placeholder="m@example.com"
@@ -34,9 +32,9 @@ export function LoginForm({
           <Label htmlFor="password">Password</Label>
           <Input id="password" name="password" required type="password" />
         </div>
-        <Button className="w-full" type="submit">
+        <SubmitButton className="w-full" formAction={signIn} type="submit">
           Login
-        </Button>
+        </SubmitButton>
       </div>
     </form>
   );
