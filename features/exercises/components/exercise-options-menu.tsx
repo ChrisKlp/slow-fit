@@ -2,22 +2,22 @@
 
 import { Activity, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { logger } from "@/lib/logger";
-import { exercises } from "@/lib/mockData/exercises";
-import { DeleteConfirmationAlert } from "../common/delete-confirmation-alert";
-import { OptionsMenu } from "../common/options-menu";
+import { DeleteConfirmationAlert } from "@/components/common/delete-confirmation-alert";
+import { OptionsMenu } from "@/components/common/options-menu";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import { logger } from "@/lib/logger";
+import type { Exercise } from "../types";
 import { ExerciseFormDialog } from "./form/exercise-form-dialog";
 
 type ExerciseOptionsMenuProps = {
-  exerciseId: string;
+  exercise: Exercise;
 };
 
-export function ExerciseOptionsMenu({ exerciseId }: ExerciseOptionsMenuProps) {
+export function ExerciseOptionsMenu({ exercise }: ExerciseOptionsMenuProps) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
@@ -47,14 +47,14 @@ export function ExerciseOptionsMenu({ exerciseId }: ExerciseOptionsMenuProps) {
         </DropdownMenuContent>
       </OptionsMenu>
       <ExerciseFormDialog
-        exercise={exercises.find((exercise) => exercise.id === exerciseId)}
+        exercise={exercise}
         onOpenChange={setIsEditDialogOpen}
         open={isEditDialogOpen}
       />
       <DeleteConfirmationAlert
         isOpen={isDeleteDialogOpen}
         onAction={() => {
-          logger.log(`Deleted exercise ${exerciseId}`);
+          logger.log(`Deleted exercise ${exercise.id}`);
         }}
         setIsOpen={setIsDeleteDialogOpen}
       />

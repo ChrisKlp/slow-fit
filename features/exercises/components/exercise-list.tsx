@@ -1,6 +1,6 @@
-import type { Exercise } from "@/lib/mockData/exercises";
-import { CardHeader } from "../common/card-header";
-import { VideoButton } from "../common/video-button";
+import { CardHeader } from "@/components/common/card-header";
+import { VideoButton } from "@/components/common/video-button";
+import type { Exercise } from "../types";
 import { ExerciseOptionsMenu } from "./exercise-options-menu";
 
 type WorkoutListProps = {
@@ -51,10 +51,10 @@ export function ExerciseList({
               <span>{exercise.name}</span>
             )}
             <div className="flex flex-wrap gap-2">
-              {exercise.videoUrl && (
-                <VideoButton label="Video" videoUrl={exercise.videoUrl} />
+              {exercise.video_url && (
+                <VideoButton label="Video" videoUrl={exercise.video_url} />
               )}
-              {exercise.extraVideos?.map((v, index) => (
+              {exercise.extra_videos?.map((v, index) => (
                 <VideoButton
                   key={v}
                   label={`Extra ${index + 1}`}
@@ -62,7 +62,7 @@ export function ExerciseList({
                 />
               ))}
             </div>
-            <ExerciseOptionsMenu exerciseId={exercise.id} />
+            <ExerciseOptionsMenu exercise={exercise} />
           </div>
         ))}
       </div>

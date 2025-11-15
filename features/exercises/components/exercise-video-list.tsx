@@ -1,6 +1,6 @@
-import type { Exercise } from "@/lib/mockData/exercises";
-import { CardHeader } from "./common/card-header";
-import { ExerciseVideo } from "./exercise-video";
+import { CardHeader } from "@/components/common/card-header";
+import { ExerciseVideo } from "@/features/exercises/components/exercise-video";
+import type { Exercise } from "../types";
 
 type ExerciseVideoListProps = {
   exercise: Exercise;
@@ -15,18 +15,18 @@ export function ExerciseVideoList({
     <div className="card">
       {!headless && <CardHeader title={exercise.name} />}
       <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2 xl:grid-cols-3">
-        {exercise.videoUrl && (
+        {exercise.video_url && (
           <ExerciseVideo
             description={exercise.description}
-            title={exercise.name}
-            videoUrl={exercise.videoUrl}
+            name={exercise.name}
+            video_url={exercise.video_url}
           />
         )}
-        {exercise.extraVideos?.[0] && (
+        {exercise.extra_videos?.[0] && (
           <ExerciseVideo
             description="Exercise with description"
-            title="Description"
-            videoUrl={exercise.extraVideos?.[0]}
+            name="Description"
+            video_url={exercise.extra_videos?.[0]}
           />
         )}
       </div>

@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { ExerciseFormDialog } from "./form/exercise-form-dialog";
 
 export function AddExerciseButton() {

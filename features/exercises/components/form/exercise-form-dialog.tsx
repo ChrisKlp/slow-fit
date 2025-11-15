@@ -2,19 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import type z from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Field,
-  FieldContent,
-  FieldLabel,
-  FieldTitle,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { logger } from "@/lib/logger";
-import { type Exercise, exerciseSchema } from "@/lib/mockData/exercises";
-import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogClose,
@@ -23,31 +12,27 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
+} from "@/components/ui/dialog";
+import {
+  Field,
+  FieldContent,
+  FieldLabel,
+  FieldTitle,
+} from "@/components/ui/field";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "../../ui/form";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { logger } from "@/lib/logger";
+import { cn } from "@/lib/utils";
+import { type FormSchemaType, formSchema } from "../../schema/exercise-schema";
+import type { Exercise } from "../../types";
 import ExtraVideosFieldArray from "./extra-videos-field-array";
-
-const formSchema = exerciseSchema
-  .omit({
-    id: true,
-  })
-  .extend({
-    name: z.string().min(1, "Please enter an exercise name."),
-    extraVideos: z.array(
-      z.object({
-        url: z.string(),
-      })
-    ),
-  })
-  .required({
-    type: true,
-  });
 
 type ExerciseFormDialogProps = {
   exercise?: Exercise;
@@ -62,22 +47,25 @@ export function ExerciseFormDialog({
   onOpenChange,
   className,
 }: ExerciseFormDialogProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: exercise?.name ?? "",
-      description: exercise?.description ?? "",
+      name: exercise?.name,
+      description: exercise?.description ?? undefined,
       type: exercise?.type,
-      videoUrl: exercise?.videoUrl ?? "",
-      extraVideos:
-        exercise?.extraVideos?.map((video) => ({
-          url: video,
-        })) ?? [],
+      video_url: exercise?.video_url ?? undefined,
+      extra_videos: exercise?.extra_videos?.map((video) => ({
+        url: video,
+      })),
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    logger.info(JSON.stringify(values, null, 2));
+    const payload = {
+      ...values,
+      extra_videos: values.extra_videos.map((video) => video.url),
+    };
+    logger.info(JSON.stringify(payload, null, 2));
     onCancel();
   }
 
@@ -161,7 +149,7 @@ export function ExerciseFormDialog({
 
             <FormField
               control={form.control}
-              name="videoUrl"
+              name="video_url"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Video</FormLabel>

@@ -1,12 +1,12 @@
-type ExerciseVideoProps = {
-  videoUrl: string;
-  title?: string;
-  description?: string;
-};
+import type { Exercise } from "../types";
+
+type ExerciseVideoProps = Partial<
+  Pick<Exercise, "video_url" | "name" | "description">
+>;
 
 export function ExerciseVideo({
-  videoUrl,
-  title,
+  video_url,
+  name,
   description,
 }: ExerciseVideoProps) {
   return (
@@ -16,8 +16,8 @@ export function ExerciseVideo({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className="h-full w-full"
-          src={videoUrl.replace("watch?v=", "embed/")}
-          title={title}
+          src={video_url?.replace("watch?v=", "embed/")}
+          title={name}
         />
       </div>
       <p>{description}</p>

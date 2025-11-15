@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/common/page-header";
-import { ExerciseVideoList } from "@/components/exercise-video-list";
 import { SingleWorkoutOptionsMenu } from "@/components/workout/workout-opions-menu";
 import { WorkoutExerciseList } from "@/components/workout-exercise-list";
 import { exercises } from "@/lib/mockData/exercises";
@@ -47,10 +46,10 @@ export default async function SingleWorkoutPage({
             workoutExercises[0].exercise && (
               <>
                 <WorkoutExerciseList exercises={workoutExercises} />
-                <ExerciseVideoList
+                {/* <ExerciseVideoList
                   exercise={workoutExercises[0].exercise}
                   headless
-                />
+                /> */}
               </>
             )
           ))}

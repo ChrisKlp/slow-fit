@@ -1,9 +1,17 @@
 import { PageHeader } from "@/components/common/page-header";
-import { AddExerciseButton } from "@/components/exercises/add-exercise-button";
-import { ExerciseList } from "@/components/exercises/exercise-list";
-import { exercises } from "@/lib/mockData/exercises";
+import { AddExerciseButton } from "@/features/exercises/components/add-exercise-button";
+import { ExerciseList } from "@/features/exercises/components/exercise-list";
+import { createClient } from "@/lib/supabase/server";
 
-export default function ExercisesPage() {
+export default async function ExercisesPage() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.from("exercises").select("*");
+
+  if (error) {
+    throw error;
+  }
+
   const pageTitle = "Available Exercises";
 
   return (
@@ -13,7 +21,7 @@ export default function ExercisesPage() {
           <AddExerciseButton />
         </div>
       </PageHeader>
-      <ExerciseList exercises={exercises} numbered title="Exercise list" />
+      <ExerciseList exercises={data} numbered title="Exercise list" />
     </>
   );
 }
