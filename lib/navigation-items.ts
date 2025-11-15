@@ -1,11 +1,4 @@
-import {
-  Clipboard,
-  Home,
-  List,
-  LogIn,
-  type LucideIcon,
-  Timer,
-} from "lucide-react";
+import { Clipboard, Home, List, type LucideIcon, Timer } from "lucide-react";
 
 export type NavigationItem = {
   title: string;
@@ -56,9 +49,4 @@ export const secondaryNavigationItems: NavigationItem[] = [
     IconComponent: List,
   },
   { title: "Exercises", url: routes.EXERCISES, IconComponent: List },
-  {
-    title: "Login",
-    url: routes.LOGIN,
-    IconComponent: LogIn,
-  },
 ];
