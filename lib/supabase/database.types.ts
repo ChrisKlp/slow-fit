@@ -64,6 +64,98 @@ export type Database = {
         }
         Relationships: []
       }
+      plan_schedule: {
+        Row: {
+          created_at: string
+          id: string
+          order_index: number
+          plan_workout_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          order_index: number
+          plan_workout_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          order_index?: number
+          plan_workout_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_schedule_plan_workout_id_fkey"
+            columns: ["plan_workout_id"]
+            isOneToOne: false
+            referencedRelation: "plan_workouts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plan_workouts: {
+        Row: {
+          created_at: string
+          id: string
+          plan_id: string
+          workout_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          plan_id: string
+          workout_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          plan_id?: string
+          workout_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_workouts_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plan_workouts_workout_id_fkey"
+            columns: ["workout_id"]
+            isOneToOne: false
+            referencedRelation: "workouts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plans: {
+        Row: {
+          cover_image: string | null
+          created_at: string
+          day_sequence: Database["public"]["Enums"]["activity_type"][]
+          id: string
+          name: string
+          total_sessions: number
+        }
+        Insert: {
+          cover_image?: string | null
+          created_at?: string
+          day_sequence: Database["public"]["Enums"]["activity_type"][]
+          id?: string
+          name: string
+          total_sessions: number
+        }
+        Update: {
+          cover_image?: string | null
+          created_at?: string
+          day_sequence?: Database["public"]["Enums"]["activity_type"][]
+          id?: string
+          name?: string
+          total_sessions?: number
+        }
+        Relationships: []
+      }
       workout_exercises: {
         Row: {
           created_at: string
@@ -147,6 +239,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      activity_type: "train" | "rest"
       exercise_type: "reps" | "time"
     }
     CompositeTypes: {
@@ -278,6 +371,7 @@ export const Constants = {
   },
   public: {
     Enums: {
+      activity_type: ["train", "rest"],
       exercise_type: ["reps", "time"],
     },
   },
