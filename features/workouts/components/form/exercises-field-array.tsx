@@ -194,6 +194,7 @@ export function ExercisesFieldArray({
                             e.target.value ? Number(e.target.value) : undefined
                           )
                         }
+                        value={field.value ?? ""}
                       />
                     </FormControl>
                   </FormItem>

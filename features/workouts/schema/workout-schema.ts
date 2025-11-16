@@ -13,7 +13,7 @@ export const workoutExerciseSchema = z.object({
   exercise_id: z.uuidv4(),
   sets: z.number(),
   reps: z.number().nullable().optional(),
-  rest: z.number().optional(),
+  rest: z.number().nullable().optional(),
   time: z.number().nullable().optional(),
   order: z.number(),
 });
