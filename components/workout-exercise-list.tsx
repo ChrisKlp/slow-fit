@@ -1,12 +1,12 @@
 import { BicepsFlexed, Repeat2, Timer } from "lucide-react";
-import type { ExtendedWorkoutExercise } from "@/lib/mockData/workout-exercises";
+import type { WorkoutExerciseWithExercise } from "@/features/workouts/types";
 import { cn } from "@/lib/utils";
 import { CardHeader } from "./common/card-header";
 import { InfoItem } from "./common/info-item";
 import { VideoButton } from "./common/video-button";
 
 type WorkoutExerciseListProps = {
-  exercises?: ExtendedWorkoutExercise[];
+  exercises?: WorkoutExerciseWithExercise[];
 };
 
 export function WorkoutExerciseList({
@@ -21,10 +21,10 @@ export function WorkoutExerciseList({
             <div className="grid grid-cols-3 items-center gap-6 p-6 lg:grid-cols-5">
               <span
                 className={cn("order-0 col-span-2 lg:col-span-1", {
-                  "col-span-3 lg:col-span-1": !exercise.exercise?.videoUrl,
+                  "col-span-3 lg:col-span-1": !exercise.exercise.video_url,
                 })}
               >
-                {`${exercise.order ?? index + 1}. ${exercise.exercise?.name}`}
+                {`${exercise.order ?? index + 1}. ${exercise.exercise.name}`}
               </span>
               <InfoItem
                 className="order-2"
@@ -55,10 +55,10 @@ export function WorkoutExerciseList({
                   />
                 )}
               </div>
-              {exercise.exercise?.videoUrl && (
+              {exercise.exercise.video_url && (
                 <VideoButton
                   className="order-1 lg:order-6 lg:justify-self-start"
-                  videoUrl={exercise.exercise?.videoUrl}
+                  videoUrl={exercise.exercise.video_url}
                 />
               )}
             </div>

@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/common/page-header";
-import { SingleWorkoutOptionsMenu } from "@/components/workout/workout-opions-menu";
 import { WorkoutExerciseList } from "@/components/workout-exercise-list";
-import { exercises } from "@/lib/mockData/exercises";
-import { workouts } from "@/lib/mockData/workouts";
+import { ExerciseVideoList } from "@/features/exercises/components/exercise-video-list";
+import { getWorkout } from "@/features/workouts/actions/workout-actions";
+import { SingleWorkoutOptionsMenu } from "@/features/workouts/components/workout-opions-menu";
 import { routes } from "@/lib/navigation-items";
 
 type SingleWorkoutPageProps = {
@@ -14,16 +14,13 @@ export default async function SingleWorkoutPage({
   params,
 }: SingleWorkoutPageProps) {
   const { id } = await params;
-  const workout = workouts.find((p) => p.id === id);
+  const { data: workout, error } = await getWorkout(id);
 
-  if (!workout) {
+  if (!workout || error) {
     notFound();
   }
 
-  const workoutExercises = workout?.exercises.map((e) => ({
-    ...e,
-    exercise: exercises.find((ex) => ex.id === e.exerciseId),
-  }));
+  const isSingleWorkout = workout.exercises.length === 1;
 
   return (
     <>
@@ -37,22 +34,19 @@ export default async function SingleWorkoutPage({
         <SingleWorkoutOptionsMenu workout={workout.id} />
       </PageHeader>
       <div className="space-y-6">
-        {workout &&
-          workoutExercises &&
-          workoutExercises.length > 0 &&
-          (workoutExercises.length > 1 ? (
-            <WorkoutExerciseList exercises={workoutExercises} />
-          ) : (
-            workoutExercises[0].exercise && (
-              <>
-                <WorkoutExerciseList exercises={workoutExercises} />
-                {/* <ExerciseVideoList
-                  exercise={workoutExercises[0].exercise}
-                  headless
-                /> */}
-              </>
-            )
-          ))}
+        {workout.exercises.length > 0 && (
+          <>
+            <WorkoutExerciseList exercises={workout.exercises} />
+            {isSingleWorkout ? (
+              <ExerciseVideoList
+                exercise={workout.exercises[0].exercise}
+                headless
+              />
+            ) : (
+              <WorkoutExerciseList exercises={workout.exercises} />
+            )}
+          </>
+        )}
       </div>
     </>
   );

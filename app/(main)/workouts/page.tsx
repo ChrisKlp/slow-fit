@@ -2,11 +2,17 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
-import { WorkoutList } from "@/components/workout-list";
-import { workouts } from "@/lib/mockData/workouts";
+import { getAllWorkouts } from "@/features/workouts/actions/workout-actions";
+import { WorkoutList } from "@/features/workouts/components/workout-list";
 import { routes } from "@/lib/navigation-items";
 
-export default function WorkoutsPage() {
+export default async function WorkoutsPage() {
+  const { data, error } = await getAllWorkouts();
+
+  if (error) {
+    throw error;
+  }
+
   const pageTitle = "Available Workouts";
 
   return (
@@ -19,7 +25,7 @@ export default function WorkoutsPage() {
           </Link>
         </Button>
       </PageHeader>
-      <WorkoutList title="Workout list" workouts={workouts} />
+      <WorkoutList title="Workout list" workouts={data} />
     </>
   );
 }

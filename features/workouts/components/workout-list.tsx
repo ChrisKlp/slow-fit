@@ -1,13 +1,13 @@
 import Link from "next/link";
-import type { Workout } from "@/lib/mockData/workouts";
+import { CardHeader } from "@/components/common/card-header";
+import { Badge } from "@/components/ui/badge";
 import { routes } from "@/lib/navigation-items";
-import { CardHeader } from "./common/card-header";
-import { Badge } from "./ui/badge";
+import type { WorkoutWithWorkoutExercises } from "../types";
 
 type WorkoutListProps = {
   title: string;
   link?: string;
-  workouts: Workout[];
+  workouts: WorkoutWithWorkoutExercises[];
   numbered?: boolean;
 };
 

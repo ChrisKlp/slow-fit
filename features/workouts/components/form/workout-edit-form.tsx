@@ -5,6 +5,14 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { EditFormButtonBar } from "@/components/common/edit-form-button-bar";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { logger } from "@/lib/logger";
 import { exercises as allExercises } from "@/lib/mockData/exercises";
 import {
@@ -13,14 +21,6 @@ import {
 } from "@/lib/mockData/workout-exercises";
 import type { Workout } from "@/lib/mockData/workouts";
 import { cn } from "@/lib/utils";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "../../ui/form";
-import { Input } from "../../ui/input";
 import { ExercisesFieldArray } from "./exercises-field-array";
 
 const formSchema = z.object({

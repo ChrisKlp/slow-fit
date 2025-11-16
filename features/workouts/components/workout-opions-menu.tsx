@@ -1,8 +1,8 @@
 "use client";
 
+import { DefaultOptionsMenu } from "@/components/common/options-menu";
 import { logger } from "@/lib/logger";
 import { routes } from "@/lib/navigation-items";
-import { DefaultOptionsMenu } from "../common/options-menu";
 
 export function SingleWorkoutOptionsMenu({ workout }: { workout: string }) {
   return (
