@@ -4,6 +4,12 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import type { FormSchemaType } from "../schema/exercise-schema";
 
+export async function getAllExercises() {
+  const supabase = await createClient();
+
+  return supabase.from("exercises").select("*");
+}
+
 export async function createExercise(data: FormSchemaType) {
   const supabase = await createClient();
 
