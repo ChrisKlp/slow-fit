@@ -1,7 +1,8 @@
 "use client";
 
 import { Activity, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import { DeleteConfirmationAlert } from "@/components/common/delete-confirmation-alert";
 import { OptionsMenu } from "@/components/common/options-menu";
 import {
@@ -9,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { logger } from "@/lib/logger";
+import { deleteExercise } from "../actions/exercise-actions";
 import type { Exercise } from "../types";
 import { ExerciseFormDialog } from "./form/exercise-form-dialog";
 
@@ -20,6 +21,20 @@ type ExerciseOptionsMenuProps = {
 export function ExerciseOptionsMenu({ exercise }: ExerciseOptionsMenuProps) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const handleDelete = () => {
+    startTransition(async () => {
+      const result = await deleteExercise(exercise.id);
+
+      if (result.success) {
+        toast.success("Exercise deleted!");
+        setIsDeleteDialogOpen(false);
+      } else {
+        toast.error(result.error || "Failed to delete exercise");
+      }
+    });
+  };
 
   return (
     <>
@@ -36,6 +51,7 @@ export function ExerciseOptionsMenu({ exercise }: ExerciseOptionsMenuProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
+            disabled={isPending}
             onSelect={() => {
               setIsDeleteDialogOpen(true);
             }}
@@ -53,9 +69,7 @@ export function ExerciseOptionsMenu({ exercise }: ExerciseOptionsMenuProps) {
       />
       <DeleteConfirmationAlert
         isOpen={isDeleteDialogOpen}
-        onAction={() => {
-          logger.log(`Deleted exercise ${exercise.id}`);
-        }}
+        onAction={handleDelete}
         setIsOpen={setIsDeleteDialogOpen}
       />
     </>

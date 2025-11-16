@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import type z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,8 +30,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { logger } from "@/lib/logger";
 import { cn } from "@/lib/utils";
+import { createExercise, updateExercise } from "../../actions/exercise-actions";
 import { type FormSchemaType, formSchema } from "../../schema/exercise-schema";
 import type { Exercise } from "../../types";
 import ExtraVideosFieldArray from "./extra-videos-field-array";
@@ -41,32 +43,49 @@ type ExerciseFormDialogProps = {
   className?: string;
 };
 
+const getDefaultValues = (exercise?: Exercise): FormSchemaType => ({
+  name: exercise?.name ?? "",
+  description: exercise?.description ?? undefined,
+  type: exercise?.type ?? "reps",
+  video_url: exercise?.video_url ?? undefined,
+  extra_videos:
+    exercise?.extra_videos?.map((video) => ({
+      url: video,
+    })) ?? [],
+});
+
 export function ExerciseFormDialog({
   exercise,
   open,
   onOpenChange,
   className,
 }: ExerciseFormDialogProps) {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: exercise?.name,
-      description: exercise?.description ?? undefined,
-      type: exercise?.type,
-      video_url: exercise?.video_url ?? undefined,
-      extra_videos: exercise?.extra_videos?.map((video) => ({
-        url: video,
-      })),
-    },
+    defaultValues: getDefaultValues(exercise),
   });
 
+  useEffect(() => {
+    if (open) {
+      form.reset(getDefaultValues(exercise));
+    }
+  }, [open, exercise, form]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const payload = {
-      ...values,
-      extra_videos: values.extra_videos.map((video) => video.url),
-    };
-    logger.info(JSON.stringify(payload, null, 2));
-    onCancel();
+    startTransition(async () => {
+      const result = exercise?.id
+        ? await updateExercise(exercise.id, values)
+        : await createExercise(values);
+
+      if (result.success) {
+        toast.success(exercise?.id ? "Exercise updated!" : "Exercise created!");
+        onCancel();
+      } else {
+        toast.error(result.error || "Something went wrong");
+      }
+    });
   }
 
   function onCancel() {
@@ -165,6 +184,7 @@ export function ExerciseFormDialog({
             <DialogFooter>
               <DialogClose asChild>
                 <Button
+                  disabled={isPending}
                   onClick={() => {
                     onCancel();
                   }}
@@ -174,7 +194,9 @@ export function ExerciseFormDialog({
                   Cancel
                 </Button>
               </DialogClose>
-              <Button type="submit">Save changes</Button>
+              <Button disabled={isPending} type="submit">
+                {isPending ? "Saving..." : "Save changes"}
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>

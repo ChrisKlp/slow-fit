@@ -1,6 +1,8 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <> */
+"use client";
+
 import { createBrowserClient } from "@supabase/ssr";
 import { useMemo } from "react";
-import { getEnvVar } from "../utils";
 import type { Database } from "./database.types";
 import type { TypedSupabaseClient } from "./types";
 
@@ -12,14 +14,14 @@ function getSupabaseBrowserClient() {
   }
 
   client = createBrowserClient<Database>(
-    getEnvVar("NEXT_PUBLIC_SUPABASE_URL"),
-    getEnvVar("NEXT_PUBLIC_SUPABASE_ANON_KEY")
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 
   return client;
 }
 
-function useSupabaseBrowser() {
+export function useSupabaseBrowser() {
   return useMemo(getSupabaseBrowserClient, []);
 }
 

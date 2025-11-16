@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppinsSans = Poppins({
   variable: "--font-poppins-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
           enableSystem
         >
+          <Toaster position="top-center" richColors />
           {children}
         </ThemeProvider>
       </body>

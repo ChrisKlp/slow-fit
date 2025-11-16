@@ -13,14 +13,6 @@ export function getProgress(value: number, max: number) {
   return Math.round((value / max) * 100);
 }
 
-export function getEnvVar(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Environment variable ${name} is not set`);
-  }
-  return value;
-}
-
 export function getWeeksNumber(totalSessions: number, daySequence: string[]) {
   return Math.ceil(totalSessions / daySequence.filter((d) => d === "W").length);
 }
