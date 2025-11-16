@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import type z from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -73,7 +72,7 @@ export function ExerciseFormDialog({
     }
   }, [open, exercise, form]);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormSchemaType) {
     startTransition(async () => {
       const result = exercise?.id
         ? await updateExercise(exercise.id, values)
