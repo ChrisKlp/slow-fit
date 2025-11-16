@@ -1,8 +1,8 @@
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { PageHeader } from "@/components/common/page-header";
-import { PlanCard } from "@/components/plans/plan-card";
 import { Button } from "@/components/ui/button";
+import { PlanCard } from "@/features/plans/components/plan-card";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 import { routes } from "@/lib/navigation-items";
 

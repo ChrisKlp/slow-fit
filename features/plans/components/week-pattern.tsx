@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: <> */
 import { BedSingle, Dumbbell, type LucideIcon } from "lucide-react";
+import { Icon } from "@/components/common/icon";
 import { cn } from "@/lib/utils";
-import { Icon } from "../common/icon";
 
 type WeekPatternProps = {
   className?: string;

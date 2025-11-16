@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/common/page-header";
-import { PlanEditForm } from "@/components/plans/form/plan-edit-form";
+import { PlanEditForm } from "@/features/plans/components/form/plan-edit-form";
 import { routes } from "@/lib/navigation-items";
 
 export default function CreateNewPlanPage() {

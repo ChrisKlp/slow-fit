@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/common/page-header";
-import { PlanEditForm } from "@/components/plans/form/plan-edit-form";
+import { PlanEditForm } from "@/features/plans/components/form/plan-edit-form";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 import { routes } from "@/lib/navigation-items";
 

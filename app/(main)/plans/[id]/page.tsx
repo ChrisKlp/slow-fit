@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/common/page-header";
-import { PlanCard } from "@/components/plans/plan-card";
-import { SinglePlanOptionsMenu } from "@/components/plans/plan-options-menu";
+import { PlanCard } from "@/features/plans/components/plan-card";
+import { SinglePlanOptionsMenu } from "@/features/plans/components/plan-options-menu";
 import { WorkoutList } from "@/features/workouts/components/workout-list";
 import { workoutPlans } from "@/lib/mockData/workout-plans";
 import { workouts } from "@/lib/mockData/workouts";
