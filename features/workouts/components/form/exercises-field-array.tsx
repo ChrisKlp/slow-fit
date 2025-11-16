@@ -17,7 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Exercise } from "@/lib/mockData/exercises";
+import type { Exercise } from "@/features/exercises/types";
+import type { FormSchemaType } from "../../schema/workout-schema";
 
 type ExercisesFieldArrayProps = {
   allExercises: Exercise[];
@@ -28,7 +29,8 @@ export function ExercisesFieldArray({
   allExercises,
   workoutId,
 }: ExercisesFieldArrayProps) {
-  const { control, getValues, watch } = useFormContext();
+  const { control, getValues, watch, setValue } =
+    useFormContext<FormSchemaType>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "exercises",
@@ -37,7 +39,7 @@ export function ExercisesFieldArray({
     <div className="space-y-4">
       <h3 className="font-semibold text-lg">Exercises</h3>
       {fields.map((_, index) => {
-        const exerciseId = watch(`exercises.${index}.exerciseId`);
+        const exerciseId = watch(`exercises.${index}.exercise_id`);
         const selectedExercise = allExercises.find(
           (ex) => ex.id === exerciseId
         );
@@ -48,13 +50,26 @@ export function ExercisesFieldArray({
             <div className="card w-full space-y-4 p-4">
               <FormField
                 control={control}
-                name={`exercises.${index}.exerciseId`}
+                name={`exercises.${index}.exercise_id`}
                 render={({ field, fieldState }) => (
                   <div className="grid gap-2">
                     <Label htmlFor="plan">Exercise</Label>
                     <Select
                       name={field.name}
-                      onValueChange={field.onChange}
+                      onValueChange={(value) => {
+                        field.onChange(value);
+
+                        const newExercise = allExercises.find(
+                          (ex) => ex.id === value
+                        );
+
+                        if (newExercise?.type !== selectedExercise?.type) {
+                          setValue(
+                            `exercises.${index}.${isTimeBasedExercise ? "time" : "reps"}`,
+                            null
+                          );
+                        }
+                      }}
                       value={field.value}
                     >
                       <SelectTrigger
@@ -110,11 +125,10 @@ export function ExercisesFieldArray({
                             {...field}
                             onChange={(e) =>
                               field.onChange(
-                                e.target.value
-                                  ? Number(e.target.value)
-                                  : undefined
+                                e.target.value ? Number(e.target.value) : null
                               )
                             }
+                            value={field.value ?? ""}
                           />
                         </FormControl>
                       </FormItem>
@@ -134,11 +148,10 @@ export function ExercisesFieldArray({
                             {...field}
                             onChange={(e) =>
                               field.onChange(
-                                e.target.value
-                                  ? Number(e.target.value)
-                                  : undefined
+                                e.target.value ? Number(e.target.value) : null
                               )
                             }
+                            value={field.value ?? ""}
                           />
                         </FormControl>
                       </FormItem>
@@ -208,10 +221,10 @@ export function ExercisesFieldArray({
           }, 0);
 
           append({
-            exerciseId: "",
+            exercise_id: "",
             sets: 0,
             order: maxOrder + 1,
-            workoutId: workoutId ?? "",
+            workout_id: workoutId,
           });
         }}
         type="button"

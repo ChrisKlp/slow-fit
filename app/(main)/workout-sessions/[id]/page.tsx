@@ -69,11 +69,11 @@ export default async function SingleWorkoutSessionPage({
           plannedExercises &&
           plannedExercises.length > 0 &&
           (plannedExercises.length > 1 ? (
-            <WorkoutExerciseList exercises={plannedExercises} />
+            <WorkoutExerciseList workoutExercises={plannedExercises} />
           ) : (
             plannedExercises[0].exercise && (
               <>
-                <WorkoutExerciseList exercises={plannedExercises} />
+                <WorkoutExerciseList workoutExercises={plannedExercises} />
                 {/* <ExerciseVideoList
                   exercise={plannedExercises[0].exercise}
                   headless

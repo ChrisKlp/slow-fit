@@ -1,8 +1,15 @@
 import { PageHeader } from "@/components/common/page-header";
-import { WorkoutEditForm } from "@/components/workout/form/workout-edit-form";
+import { getAllExercises } from "@/features/exercises/actions/exercise-actions";
+import { WorkoutEditForm } from "@/features/workouts/components/form/workout-edit-form";
 import { routes } from "@/lib/navigation-items";
 
-export default function CreateNewWorkoutPage() {
+export default async function CreateNewWorkoutPage() {
+  const { data: exercises, error: exercisesError } = await getAllExercises();
+
+  if (exercisesError) {
+    throw exercisesError;
+  }
+
   return (
     <>
       <PageHeader
@@ -13,7 +20,7 @@ export default function CreateNewWorkoutPage() {
         title="Create new workout"
       />
       <div className="space-y-6">
-        <WorkoutEditForm />
+        <WorkoutEditForm allExercises={exercises} />
       </div>
     </>
   );

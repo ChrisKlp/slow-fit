@@ -2,12 +2,12 @@ import Link from "next/link";
 import { CardHeader } from "@/components/common/card-header";
 import { Badge } from "@/components/ui/badge";
 import { routes } from "@/lib/navigation-items";
-import type { WorkoutWithWorkoutExercises } from "../types";
+import type { Workout } from "../types";
 
 type WorkoutListProps = {
   title: string;
   link?: string;
-  workouts: WorkoutWithWorkoutExercises[];
+  workouts: Workout[];
   numbered?: boolean;
 };
 
@@ -36,7 +36,7 @@ export function WorkoutList({ title, link, workouts }: WorkoutListProps) {
               <span className={numberColumnWidth}>{idx + 1}</span>
               <span>{workout.name}</span>
             </div>
-            <span>{workout.exercises.length}</span>
+            <span>{workout.exercises?.length}</span>
             <span>
               {workout.tags?.[0] && (
                 <Badge variant="outline">{workout.tags[0]}</Badge>

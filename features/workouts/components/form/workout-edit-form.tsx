@@ -2,9 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import { toast } from "sonner";
 import { EditFormButtonBar } from "@/components/common/edit-form-button-bar";
+import { FormErrorList } from "@/components/form-error-list";
 import {
   Form,
   FormControl,
@@ -13,50 +15,55 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { logger } from "@/lib/logger";
-import { exercises as allExercises } from "@/lib/mockData/exercises";
-import {
-  type ExtendedWorkoutExercise,
-  workoutExerciseSchema,
-} from "@/lib/mockData/workout-exercises";
-import type { Workout } from "@/lib/mockData/workouts";
+import type { Exercise } from "@/features/exercises/types";
+import { routes } from "@/lib/navigation-items";
 import { cn } from "@/lib/utils";
+import {
+  createWorkout,
+  deleteWorkout,
+  updateWorkout,
+} from "../../actions/workout-actions";
+import { type FormSchemaType, formSchema } from "../../schema/workout-schema";
+import type { Workout } from "../../types";
 import { ExercisesFieldArray } from "./exercises-field-array";
-
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  coverImage: z.url("Must be a valid URL"),
-  tags: z.string().optional(),
-  exercises: z
-    .array(workoutExerciseSchema)
-    .min(1, "At least one exercise is required"),
-});
 
 type WorkoutEditFormProps = {
   workout?: Workout;
-  exercises?: ExtendedWorkoutExercise[];
+  allExercises: Exercise[];
   className?: string;
 };
 
+const getDefaultValues = (workout?: Workout): FormSchemaType => ({
+  name: workout?.name ?? "",
+  cover_image: workout?.cover_image ?? "",
+  tags: workout?.tags?.join(",") ?? "",
+  exercises:
+    workout?.exercises?.map((e, index) => ({
+      id: e.id ?? undefined,
+      workout_id: e.workout_id ?? undefined,
+      exercise_id: e.exercise_id ?? undefined,
+      sets: e.sets,
+      reps: e.reps ?? undefined,
+      rest: e.rest ?? undefined,
+      time: e.time ?? undefined,
+      order: e.order ?? index + 1,
+    })) ?? [],
+});
+
 export function WorkoutEditForm({
   workout,
-  exercises,
+  allExercises,
   className,
 }: WorkoutEditFormProps) {
   const router = useRouter();
-  const filtered = exercises?.map(({ exercise, ...rest }) => rest);
+  const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: workout?.name ?? "",
-      coverImage: workout?.coverImage ?? "",
-      tags: workout?.tags?.join(",") ?? "",
-      exercises: filtered ?? [],
-    },
+    defaultValues: getDefaultValues(workout),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormSchemaType) {
     // Sort exercises by order, keeping original array order for same order values
     const sortedExercises = values.exercises
       .map((ex, index) => ({ ...ex, originalIndex: index }))
@@ -71,13 +78,36 @@ export function WorkoutEditForm({
         order: index + 1,
       }));
 
-    const result = {
+    const sortedValues = {
       ...values,
       exercises: sortedExercises,
     };
 
-    logger.info("onSubmit");
-    logger.info(JSON.stringify(result, null, 2));
+    startTransition(async () => {
+      const result = workout?.id
+        ? await updateWorkout(workout.id, sortedValues)
+        : await createWorkout(sortedValues);
+
+      if (result.success) {
+        toast.success("Workout updated!");
+        onCancel();
+      } else {
+        toast.error(result.error || "Something went wrong");
+      }
+    });
+  }
+
+  function onDelete(workoutId: string) {
+    startTransition(async () => {
+      const result = await deleteWorkout(workoutId);
+
+      if (result.success) {
+        toast.success("Exercise deleted!");
+        router.push(routes.WORKOUTS);
+      } else {
+        toast.error(result.error || "Something went wrong");
+      }
+    });
   }
 
   function onCancel() {
@@ -108,7 +138,7 @@ export function WorkoutEditForm({
           />
           <FormField
             control={form.control}
-            name="coverImage"
+            name="cover_image"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cover Image URL</FormLabel>
@@ -139,12 +169,13 @@ export function WorkoutEditForm({
             workoutId={workout?.id}
           />
 
+          <FormErrorList errors={form.formState.errors} />
+
           <EditFormButtonBar
             formId={formId}
+            isPending={isPending}
             onCancel={onCancel}
-            onDelete={() => {
-              logger.info(`Delete workout with id ${workout?.id}`);
-            }}
+            onDelete={workout?.id ? () => onDelete(workout.id) : undefined}
           />
         </form>
       </Form>

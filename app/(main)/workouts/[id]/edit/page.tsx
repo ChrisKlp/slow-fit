@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/common/page-header";
+import { getAllExercises } from "@/features/exercises/actions/exercise-actions";
+import { getWorkout } from "@/features/workouts/actions/workout-actions";
 import { WorkoutEditForm } from "@/features/workouts/components/form/workout-edit-form";
-import { exercises } from "@/lib/mockData/exercises";
-import { workouts } from "@/lib/mockData/workouts";
 import { routes } from "@/lib/navigation-items";
 
 type EditWorkoutPageProps = {
@@ -13,16 +13,17 @@ export default async function EditWorkoutPage({
   params,
 }: EditWorkoutPageProps) {
   const { id } = await params;
-  const workout = workouts.find((p) => p.id === id);
+  const { data: workout, error: workoutError } = await getWorkout(id);
+  const { data: exercises, error: exercisesError } = await getAllExercises();
 
-  if (!workout) {
+  if (workoutError || exercisesError) {
+    throw workoutError;
+  }
+
+  if (!workout || workoutError) {
     notFound();
   }
 
-  const workoutExercises = workout?.exercises.map((e) => ({
-    ...e,
-    exercise: exercises.find((ex) => ex.id === e.exerciseId),
-  }));
   return (
     <>
       <PageHeader
@@ -34,9 +35,7 @@ export default async function EditWorkoutPage({
         title="Edit workout"
       />
       <div className="space-y-6">
-        {workout && workoutExercises && workoutExercises.length > 0 && (
-          <WorkoutEditForm exercises={workoutExercises} workout={workout} />
-        )}
+        <WorkoutEditForm allExercises={exercises} workout={workout} />
       </div>
     </>
   );

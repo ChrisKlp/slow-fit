@@ -36,14 +36,12 @@ export default async function SingleWorkoutPage({
       <div className="space-y-6">
         {workout.exercises.length > 0 && (
           <>
-            <WorkoutExerciseList exercises={workout.exercises} />
-            {isSingleWorkout ? (
+            <WorkoutExerciseList workoutExercises={workout.exercises} />
+            {isSingleWorkout && (
               <ExerciseVideoList
                 exercise={workout.exercises[0].exercise}
                 headless
               />
-            ) : (
-              <WorkoutExerciseList exercises={workout.exercises} />
             )}
           </>
         )}

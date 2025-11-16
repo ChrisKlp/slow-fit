@@ -6,59 +6,58 @@ import { InfoItem } from "./common/info-item";
 import { VideoButton } from "./common/video-button";
 
 type WorkoutExerciseListProps = {
-  exercises?: WorkoutExerciseWithExercise[];
+  workoutExercises?: WorkoutExerciseWithExercise[];
 };
 
 export function WorkoutExerciseList({
-  exercises = [],
+  workoutExercises = [],
 }: WorkoutExerciseListProps) {
   return (
     <div className="card p-0">
       <CardHeader title="Exercises" />
       <div className="grid">
-        {exercises.map((exercise, index) => (
-          <div className="border-b" key={exercise.id}>
+        {workoutExercises.map((we, index) => (
+          <div className="border-b" key={we.id}>
             <div className="grid grid-cols-3 items-center gap-6 p-6 lg:grid-cols-5">
               <span
                 className={cn("order-0 col-span-2 lg:col-span-1", {
-                  "col-span-3 lg:col-span-1": !exercise.exercise.video_url,
+                  "col-span-3 lg:col-span-1": !we.exercise.video_url,
                 })}
               >
-                {`${exercise.order ?? index + 1}. ${exercise.exercise.name}`}
+                {`${we.order ?? index + 1}. ${we.exercise.name}`}
               </span>
               <InfoItem
                 className="order-2"
                 icon={BicepsFlexed}
                 label="Sets"
-                value={exercise.sets}
+                value={we.sets}
                 variant="secondary"
               />
               <div className="order-3">
-                {exercise.reps && (
-                  <InfoItem icon={Repeat2} label="Reps" value={exercise.reps} />
-                )}
-                {exercise.time && (
+                {we.exercise.type === "time" ? (
                   <InfoItem
                     icon={Timer}
                     label="Time"
-                    value={`${exercise.time}s`}
+                    value={we.time ? `${we.time}s` : null}
                   />
+                ) : (
+                  <InfoItem icon={Repeat2} label="Reps" value={we.reps} />
                 )}
               </div>
               <div className="order-4">
-                {exercise.rest && (
+                {we.rest && (
                   <InfoItem
                     icon={Timer}
                     label="Rest"
-                    value={exercise.rest}
+                    value={we.rest}
                     variant="primary"
                   />
                 )}
               </div>
-              {exercise.exercise.video_url && (
+              {we.exercise.video_url && (
                 <VideoButton
                   className="order-1 lg:order-6 lg:justify-self-start"
-                  videoUrl={exercise.exercise.video_url}
+                  videoUrl={we.exercise.video_url}
                 />
               )}
             </div>

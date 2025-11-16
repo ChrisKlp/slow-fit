@@ -4,26 +4,46 @@ import { Button } from "../ui/button";
 
 type EditFormButtonBarProps = {
   formId: string;
+  isPending?: boolean;
   onCancel: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
 };
 
 export function EditFormButtonBar({
   formId,
+  isPending,
   onCancel,
   onDelete,
 }: EditFormButtonBarProps) {
   return (
     <div className="flex justify-end gap-3">
-      <Button onClick={onCancel} type="button" variant="outline">
+      <Button
+        disabled={isPending}
+        onClick={onCancel}
+        type="button"
+        variant="outline"
+      >
         Cancel
       </Button>
-      <Button onClick={onDelete} type="button" variant="destructive">
-        Delete
-      </Button>
-      <Button form={formId} type="submit">
+      {onDelete && (
+        <Button
+          disabled={isPending}
+          onClick={onDelete}
+          type="button"
+          variant="destructive"
+        >
+          Delete
+        </Button>
+      )}
+      <Button disabled={isPending} form={formId} type="submit">
         <span className="flex gap-1">
-          Save<span className="hidden md:inline-flex">changes</span>
+          {isPending ? (
+            "Saving..."
+          ) : (
+            <>
+              Save<span className="hidden md:inline-flex">changes</span>
+            </>
+          )}
         </span>
       </Button>
     </div>
