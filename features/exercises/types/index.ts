@@ -1,3 +1,3 @@
-import type { Tables } from "@/types/db";
+import type { Tables } from "@/lib/supabase/database.types";
 
 export type Exercise = Tables<"exercises">;
