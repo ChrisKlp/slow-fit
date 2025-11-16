@@ -31,7 +31,7 @@ export default async function SingleWorkoutPage({
         ]}
         title={workout.name}
       >
-        <SingleWorkoutOptionsMenu workout={workout.id} />
+        <SingleWorkoutOptionsMenu workoutId={workout.id} />
       </PageHeader>
       <div className="space-y-6">
         {workout.exercises.length > 0 && (

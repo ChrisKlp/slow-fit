@@ -1,5 +1,6 @@
 import { Activity, EllipsisVertical, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -8,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { DeleteConfirmationAlert } from "./delete-confirmation-alert";
 
 type OptionsMenuProps = {
   children: React.ReactNode;
@@ -30,13 +32,14 @@ export function OptionsMenu({
   );
 }
 
-type CrudOptionsMenuProps = {
+type DefaultOptionsMenuProps = {
   editHref?: string;
   editLabel?: string;
   viewHref?: string;
   viewLabel?: string;
   onDelete?: () => void;
   variant?: "outline" | "ghost";
+  isPending?: boolean;
 };
 
 export function DefaultOptionsMenu({
@@ -46,37 +49,49 @@ export function DefaultOptionsMenu({
   viewLabel,
   onDelete,
   variant,
-}: CrudOptionsMenuProps) {
+  isPending = false,
+}: DefaultOptionsMenuProps) {
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   return (
-    <OptionsMenu variant={variant}>
-      <DropdownMenuContent align="end" className="w-40" forceMount>
-        {viewHref && (
-          <DropdownMenuItem asChild>
-            <Link href={viewHref}>
-              <Activity className="mr-2 h-4 w-4" />
-              <span>{viewLabel}</span>
-            </Link>
+    <>
+      <OptionsMenu variant={variant}>
+        <DropdownMenuContent align="end" className="w-40" forceMount>
+          {viewHref && (
+            <DropdownMenuItem asChild>
+              <Link href={viewHref}>
+                <Activity className="mr-2 h-4 w-4" />
+                <span>{viewLabel}</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
+          {editHref && (
+            <DropdownMenuItem asChild>
+              <Link href={editHref}>
+                <Pencil className="mr-2 h-4 w-4" />
+                <span>{editLabel}</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            disabled={isPending}
+            onClick={() => {
+              setIsDeleteDialogOpen(true);
+            }}
+            variant="destructive"
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            <span>Delete</span>
           </DropdownMenuItem>
-        )}
-        {editHref && (
-          <DropdownMenuItem asChild>
-            <Link href={editHref}>
-              <Pencil className="mr-2 h-4 w-4" />
-              <span>{editLabel}</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            onDelete?.();
-          }}
-          variant="destructive"
-        >
-          <Trash2 className="mr-2 h-4 w-4" />
-          <span>Delete</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </OptionsMenu>
+        </DropdownMenuContent>
+      </OptionsMenu>
+      {onDelete && (
+        <DeleteConfirmationAlert
+          isOpen={isDeleteDialogOpen}
+          onAction={onDelete}
+          setIsOpen={setIsDeleteDialogOpen}
+        />
+      )}
+    </>
   );
 }
